@@ -1,5 +1,7 @@
 # Проверки сервиса
 
+Для второго UFI-профиля используется та же база тестов. `Build-Ufi.ps1 -IncludeTests` адаптирует package и USB IP в instrumentation; запуск — `am instrument -w local.modem.hub.tests/.InboxTest`. Удаляйте только `local.modem.hub.tests` и затем заново запускайте `local.modem.hub/.MainActivity`. Подробности и отдельная проверка радиорегистрации — [в инструкции второго модема](../docs/14-second-modem.md).
+
 ## Светодиод
 
 Политика времени и приоритетов без модема:

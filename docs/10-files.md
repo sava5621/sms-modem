@@ -5,6 +5,7 @@
 | Файл | Назначение | Куда устанавливается |
 | --- | --- | --- |
 | `artifacts/sms-modem-4.1.apk` | Подписанное приложение приёма, архива, HTTP UI и WebSocket | Android package `local.modem.sms` |
+| `artifacts/sms-modem-ufi-4.2.apk` | Отдельный вариант для UFI 2025, USB `192.168.101.1`, тот же СМС UI/WebSocket/LED | Обновление существующего `local.modem.hub` |
 | `artifacts/wifi-off-1.0.apk` | Событийное отключение Wi-Fi и AP | Android package `local.modem.wifioff` |
 | `artifacts/sms-only-control.jar` | DEX-контроллер системных сетевых API | `/system/etc/sms-only-control.jar` |
 | `modem/modem-usb-lan.sh` | Восстановление USB IP и запуск политики | `/system/etc/modem-usb-lan.sh`, root:root, 0644 |
@@ -15,6 +16,8 @@
 
 Эти файлы достаточны для настройки при наличии USB ADB, драйверов и подходящей прошивки. Самостоятельно прошивать bootloader, modem/baseband или полный Android image для проекта не требуется. Полные дампы заводских APK и init не поставляются; установщик сохраняет исходные файлы конкретного устройства и добавляет только свой boot hook.
 
+Установщик с boot hook относится к первому профилю. Второй UFI 2025 использует `Install-Ufi.ps1` и системные сетевые API без root; профили и подписи APK нельзя смешивать. См. [отдельные этапы второго модема](14-second-modem.md).
+
 ## Исходники
 
 | Каталог | Содержание |
@@ -23,6 +26,7 @@
 | `app/assets/index.html` | Веб-интерфейс без внешних CDN |
 | `app/AndroidManifest.xml` | Package, версия 4.1, API 19, SMS/boot/network/phone-state/wake-lock permissions |
 | `app/tests/` | Instrumentation manifest и синтетический интеграционный тест |
+| `devices/ufi-20251104/` | Manifest второго APK, `UfiPolicy`, HOME и ограниченная ADB-диагностика radio mode; общий код берётся из `app/` при сборке |
 | `wifi-off/src/` и `wifi-off/AndroidManifest.xml` | Receiver и Activity отключения Wi-Fi, версия 1.0 |
 | `modem/src/SmsOnlyControl.java` | Исходник DEX-контроллера |
 
@@ -43,6 +47,9 @@
 | `scripts/Build.ps1` | Сборка двух приложений, контроллера и необязательного test APK |
 | `scripts/Test-WebSocket.ps1` | Проверки протокола и ограничений ресурсов без модема |
 | `scripts/Test-Indicator.ps1` | Проверки приоритетов цветов и пятисекундного таймера без модема |
+| `scripts/Build-Ufi.ps1` | Сборка варианта второго модема из общих исходников и его профильных классов |
+| `scripts/Install-Ufi.ps1` | Обновление только UFI 2025 с сохранением существующего package/архива |
+| `scripts/Verify-Ufi.ps1` | Отдельная проверка конфигурации и регистрации второго модема |
 
 Сценарии записаны для PowerShell 5.1+ на Windows, сборка использует Windows `aapt.exe`. Shell-файлы для Android должны оставаться UTF-8 без BOM с окончаниями LF. `.gitattributes` фиксирует LF для `*.sh`.
 

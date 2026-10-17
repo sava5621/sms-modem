@@ -1,0 +1,115 @@
+{
+  "Date": "2026-10-17",
+  "DeviceProfile": "UFI eng.richal.20251104",
+  "Package": "local.modem.hub",
+  "PreviousVersion": "1.4",
+  "Version": "4.2",
+  "VersionCode": 6,
+  "Artifact": {
+    "path": "artifacts/sms-modem-ufi-4.2.apk",
+    "sha256": "e52a3e0540d4658cebf0069a4518547c5a9d29e9ff2f8832dfd8801447741dca",
+    "bytes": 49558,
+    "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.richal.20251104:user/test-keys",
+    "package": "local.modem.hub"
+  },
+  "ExistingPlatformSignatureRetained": true,
+  "Uid": 1000,
+  "NoRootUsed": true,
+  "FirstModemApkAndConfigurationChanged": false,
+  "DatabaseSchemaChanged": false,
+  "MessagesBefore": 0,
+  "MessagesAfter": 0,
+  "PrivateSmsExported": false,
+  "AndroidInstrumentation": {
+    "Passed": true,
+    "ExistingMessagesPreserved": 0,
+    "SyntheticMessagesCleaned": true,
+    "FinalSmsCoreChangedAfterTest": false,
+    "PerformedBeforeFirewallPeriodicRefreshAddition": true
+  },
+  "SharedUiTestsPassed": true,
+  "LedPolicyChecksPassed": 19,
+  "FinalConfiguration": {
+    "DateUtc": "2026-10-17T14:15:53.9357858Z",
+    "ConfigurationPassed": true,
+    "RadioRegistered": false,
+    "CarrierSmsReceiptVerified": false,
+    "Checks": {
+      "MobileData": "0",
+      "Roaming": "0",
+      "Wifi": "0",
+      "WifiScan": "0",
+      "TetherSupported": "0",
+      "Forward4": "0",
+      "Forward6": "0",
+      "SIM": "READY",
+      "BootId": "a0e160c2-6657-4fc2-8c28-062adc01054d",
+      "Uptime": "49.83 76.28",
+      "AdbIdentity": "uid=2000(shell) gid=2000(shell) groups=1004(input),1007(log),1011(adb),1015(sdcard_rw),1028(sdcard_r),3001(net_bt_admin),3002(net_bt),3003(inet),3006(net_bw_stats)",
+      "HttpStatus": 200,
+      "MessageCount": 0,
+      "ProviderAvailable": true,
+      "Network": {
+        "signalLevel": null,
+        "signalMetric": "",
+        "updatedAt": 1792246542482,
+        "technology": "LTE",
+        "simPresent": true,
+        "registered": false,
+        "available": true,
+        "serviceState": "OUT_OF_SERVICE",
+        "signalDbm": null,
+        "simState": "READY",
+        "simReady": true,
+        "operator": "MTS RUS"
+      },
+      "Indicator": {
+        "fault": "NO_NETWORK",
+        "hardwareAvailable": true,
+        "color": "BLUE",
+        "visitRemainingMs": 0
+      },
+      "Policy": {
+        "firewallEnabled": true,
+        "uid": 1000,
+        "forwarding": false,
+        "dataRoaming": 0,
+        "wifi": 0,
+        "mobileData": 0,
+        "error": "",
+        "tethering": false,
+        "checkedAt": 1792246552492
+      },
+      "NoDefaultRoute": true,
+      "NoSharingProcesses": true,
+      "VendorDisabled": true,
+      "NetdFirewallEnabled": true
+    },
+    "Failures": []
+  },
+  "CarrierSmsReceiptVerified": false,
+  "TestedSims": [
+    "MegaFon",
+    "MTS"
+  ],
+  "NetworkModesTested": [
+    0,
+    1,
+    9
+  ],
+  "OriginalNetworkModeRestored": 12,
+  "BootAfterSimSwapRestoredService": true,
+  "AdditionalBootAround1715ExplainedByOwnerReconnect": true,
+  "LiveBrowserStabilityTest": {
+    "RequestedSeconds": 80,
+    "Completed": false,
+    "Error": "ERR_EMPTY_RESPONSE",
+    "OwnerConfirmedBothModemsDisconnected": true
+  },
+  "NextSteps": [
+    "Reconnect second modem in better physical location",
+    "Check registration and real incoming SMS",
+    "Repeat browser and uptime stability checks"
+  ],
+  "PublicReportContainsSmsBodiesSendersOrKeys": false
+}
