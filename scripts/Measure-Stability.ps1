@@ -15,7 +15,7 @@ do {
     $row = [ordered]@{DateUtc=[DateTime]::UtcNow.ToString('o'); Http=0; BootId='';
         Uptime=''; SIM=''; MobileData=''; Forwarding=''; RebootWatchdog=''; CpuRaw=''; Error=''}
     try {
-        $http = Invoke-WebRequest -UseBasicParsing -Uri 'http://192.168.100.1:8088/' -TimeoutSec 4
+        $http = Invoke-WebRequest -UseBasicParsing -Method Head -Uri 'http://192.168.100.1:8088/' -TimeoutSec 4
         $row.Http = [int]$http.StatusCode
     } catch { $row.Error = 'HTTP unavailable' }
     try {

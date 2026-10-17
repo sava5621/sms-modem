@@ -5,7 +5,7 @@ Import-Module (Join-Path $PSScriptRoot 'Modem.psm1') -Force
 $root = Split-Path $PSScriptRoot -Parent
 Assert-Modem $Adb $Serial
 Test-ArtifactHashes $root
-foreach ($file in @('sms-modem-4.0.apk', 'wifi-off-1.0.apk')) {
+foreach ($file in @('sms-modem-4.1.apk', 'wifi-off-1.0.apk')) {
     $result = Invoke-ModemAdb $Adb $Serial @('install', '-r', (Join-Path $root "artifacts/$file"))
     if ($result -notmatch '(?m)^Success\r?$') { throw "APK installation failed: $result" }
     Write-Output "$file installed"

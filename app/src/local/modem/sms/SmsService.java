@@ -34,6 +34,7 @@ public final class SmsService extends Service {
     private final AtomicLong revision=new AtomicLong();
     private Handler events;
     private NetworkMonitor network;
+    private LedController led;
     private final Runnable sendMessages=new Runnable(){public void run(){
         try { if(running)sockets.broadcast(new JSONObject().put("type","messages").put("revision",revision.get()).toString()); }
         catch(Exception ex) { Log.w("SmsInbox","Unable to publish message event"); }
@@ -53,9 +54,11 @@ public final class SmsService extends Service {
         pool = new ThreadPoolExecutor(2, 4, 30, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(12));
         running = true;
         events=new Handler();
+        led=new LedController(this);
+        led.start();
         SmsStore.get(this).setChangeListener(messagesChanged);
         network=new NetworkMonitor(this,new Runnable(){public void run(){
-            try { if(running)sockets.broadcast(stateMessage("network").toString()); }
+            try { if(running){led.network(network.snapshot());sockets.broadcast(stateMessage("network").toString());} }
             catch(Exception ex) { Log.w("SmsNetwork","Unable to publish radio event"); }
         }});
         network.start();
@@ -151,7 +154,10 @@ public final class SmsService extends Service {
                 reply(client,200,"application/json; charset=utf-8",bytes(result.toString()),false);return;
             }
             if (!first[0].equals("GET") && !head) { reply(client,405,"text/plain",bytes("Method not allowed"),false);return; }
-            if (target.getPath().equals("/") || target.getPath().equals("/index.html")) reply(client, 200, "text/html; charset=utf-8", page, head);
+            if (target.getPath().equals("/") || target.getPath().equals("/index.html")) {
+                reply(client, 200, "text/html; charset=utf-8", page, head);
+                if(!head)led.pageOpened();
+            }
             else if (target.getPath().equals("/api/sms")) {
                 int offset = number(target.getQueryParameter("offset"), 0, 0, 1000000);
                 int limit = number(target.getQueryParameter("limit"), 100, 1, 200);
@@ -172,7 +178,7 @@ public final class SmsService extends Service {
         } finally { if(!upgraded)try { client.close(); } catch (Exception ignored) {} }
     }
     private JSONObject stateMessage(String type) throws Exception {
-        return new JSONObject().put("type",type).put("revision",revision.get()).put("network",network.snapshot());
+        return new JSONObject().put("type",type).put("revision",revision.get()).put("network",network.snapshot()).put("indicator",led.snapshot());
     }
     private static boolean hasToken(String value,String token) {
         for(String part:value.split(","))if(part.trim().equalsIgnoreCase(token))return true;
@@ -220,6 +226,7 @@ public final class SmsService extends Service {
         SmsStore.get(this).clearChangeListener(messagesChanged);
         if(events!=null)events.removeCallbacksAndMessages(null);
         if(network!=null)network.stop();
+        if(led!=null)led.stop();
         sockets.shutdown();
         try { if (listener != null) listener.close(); } catch (Exception ignored) {}
         if (acceptThread != null) acceptThread.interrupt(); if (pool != null) pool.shutdownNow();

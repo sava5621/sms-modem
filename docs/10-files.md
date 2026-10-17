@@ -4,7 +4,7 @@
 
 | Файл | Назначение | Куда устанавливается |
 | --- | --- | --- |
-| `artifacts/sms-modem-4.0.apk` | Подписанное приложение приёма, архива, HTTP UI и WebSocket | Android package `local.modem.sms` |
+| `artifacts/sms-modem-4.1.apk` | Подписанное приложение приёма, архива, HTTP UI и WebSocket | Android package `local.modem.sms` |
 | `artifacts/wifi-off-1.0.apk` | Событийное отключение Wi-Fi и AP | Android package `local.modem.wifioff` |
 | `artifacts/sms-only-control.jar` | DEX-контроллер системных сетевых API | `/system/etc/sms-only-control.jar` |
 | `modem/modem-usb-lan.sh` | Восстановление USB IP и запуск политики | `/system/etc/modem-usb-lan.sh`, root:root, 0644 |
@@ -21,12 +21,14 @@
 | --- | --- |
 | `app/src/local/modem/sms/` | `SmsService`, `SmsReceiver`, `SmsStore`, `BootReceiver`, `MainActivity`, `DeleteGuard` |
 | `app/assets/index.html` | Веб-интерфейс без внешних CDN |
-| `app/AndroidManifest.xml` | Package, версия 4.0, API 19, SMS/boot/network/phone-state permissions |
+| `app/AndroidManifest.xml` | Package, версия 4.1, API 19, SMS/boot/network/phone-state/wake-lock permissions |
 | `app/tests/` | Instrumentation manifest и синтетический интеграционный тест |
 | `wifi-off/src/` и `wifi-off/AndroidManifest.xml` | Receiver и Activity отключения Wi-Fi, версия 1.0 |
 | `modem/src/SmsOnlyControl.java` | Исходник DEX-контроллера |
 
 Версия 4.0 добавляет `NetworkMonitor`, `WebSocketProtocol`, `WebSocketHub` и события изменений `SmsStore`. SMS-only политика и Wi-Fi helper сохранены. Наследуемый `PUBLIC_HOST` в `SmsService.java` описан в [API](11-service-and-api.md). Это разрешённый входной Host для прежнего reverse proxy, а не адрес исходящей отправки сообщений.
+
+Версия 4.1 добавляет `LedPolicy` (выбор цвета и срок вспышки) и `LedController` (три канала светодиода и ограниченный таймер). Отдельный root-процесс для индикации не нужен.
 
 ## Сценарии для компьютера
 
@@ -40,12 +42,13 @@
 | `scripts/Measure-Stability.ps1` | Ограниченное по времени наблюдение HTTP и boot_id |
 | `scripts/Build.ps1` | Сборка двух приложений, контроллера и необязательного test APK |
 | `scripts/Test-WebSocket.ps1` | Проверки протокола и ограничений ресурсов без модема |
+| `scripts/Test-Indicator.ps1` | Проверки приоритетов цветов и пятисекундного таймера без модема |
 
 Сценарии записаны для PowerShell 5.1+ на Windows, сборка использует Windows `aapt.exe`. Shell-файлы для Android должны оставаться UTF-8 без BOM с окончаниями LF. `.gitattributes` фиксирует LF для `*.sh`.
 
 ## Материалы
 
-`docs/01–09` — последовательные этапы настройки и обслуживания, `docs/11-service-and-api.md` — справочник приложения, `docs/12-live-updates.md` — WebSocket и индикатор сети. Два исходных фото лежат в `docs/images/`. В `reports/2026-10-17/` сохранены измерения и обезличенные результаты исходного испытания на 3.0, в том числе неудачный начальный тест. Номеров и текстов реальных сообщений там нет. `tests/` содержит проверки протокола и UI на синтетических данных.
+`docs/01–09` — последовательные этапы настройки и обслуживания, `docs/11-service-and-api.md` — справочник приложения, `docs/12-live-updates.md` — WebSocket и индикатор сети, `docs/13-led-indicator.md` — светодиод корпуса. Два исходных фото лежат в `docs/images/`. В `reports/2026-10-17/` сохранены измерения и обезличенные результаты исходного испытания на 3.0, в том числе неудачный начальный тест. Номеров и текстов реальных сообщений там нет. `tests/` содержит проверки протокола и UI на синтетических данных, а `indicator.device.test.cjs` проверяет светодиод и таймер на подключённом модеме без изменения СМС.
 
 ## Что хранится отдельно
 

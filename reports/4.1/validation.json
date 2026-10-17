@@ -1,0 +1,145 @@
+{
+  "Date": "2026-10-17",
+  "AppVersion": "4.1",
+  "VersionCode": 5,
+  "ApiLevel": 19,
+  "Artifact": {
+    "path": "artifacts/sms-modem-4.1.apk",
+    "sha256": "6e5b1ed12351ec6afa8ff9d115dbc9ecb59460741f7654349edd0a0761036e53",
+    "bytes": 41360
+  },
+  "OriginalSigningCertificateRetained": true,
+  "DatabaseSchemaChanged": false,
+  "MessagesBefore": 48,
+  "MessagesAfter": 48,
+  "OriginalIdSetPreserved": true,
+  "SameOsBoot": true,
+  "PolicyTestsPassed": 19,
+  "ColorConfirmation": {
+    "Green": "4G_L2: owner visually confirmed",
+    "Blue": "WIFI_S: owner visually confirmed"
+  },
+  "RealDeviceTest": {
+    "passed": true,
+    "messageCount": 48,
+    "frames": {
+      "ready": 3,
+      "heartbeat": 1
+    },
+    "pageErrors": [],
+    "samples": [
+      {
+        "label": "healthy idle",
+        "color": "OFF",
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "remainingMs": 0
+      },
+      {
+        "label": "HEAD, status API and 404 do not pulse",
+        "color": "OFF",
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "remainingMs": 0
+      },
+      {
+        "label": "page opened",
+        "color": "GREEN",
+        "red": 0,
+        "green": 255,
+        "blue": 0,
+        "remainingMs": 4666
+      },
+      {
+        "label": "before five seconds",
+        "color": "GREEN",
+        "red": 0,
+        "green": 255,
+        "blue": 0,
+        "remainingMs": 560
+      },
+      {
+        "label": "after five seconds with live socket",
+        "color": "OFF",
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "remainingMs": 0
+      },
+      {
+        "label": "manual SMS refresh",
+        "color": "OFF",
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "remainingMs": 0
+      },
+      {
+        "label": "background heartbeat and network events",
+        "color": "OFF",
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "remainingMs": 0
+      },
+      {
+        "label": "index.html opened",
+        "color": "GREEN",
+        "red": 0,
+        "green": 255,
+        "blue": 0,
+        "remainingMs": 4635
+      },
+      {
+        "label": "reopening extends beyond first deadline",
+        "color": "GREEN",
+        "red": 0,
+        "green": 255,
+        "blue": 0,
+        "remainingMs": 2631
+      },
+      {
+        "label": "five seconds after last opening",
+        "color": "OFF",
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "remainingMs": 0
+      }
+    ],
+    "physicalSimRemoval": false,
+    "radioSettingsChanged": false,
+    "savedSmsContent": false
+  },
+  "SmsOnly": {
+    "DateUtc": "2026-10-17T13:48:14.755109Z",
+    "Checks": {
+      "SIM": "READY",
+      "MobileData": "0",
+      "Roaming": "0",
+      "Wifi": "0",
+      "WifiScan": "0",
+      "TetherSupported": "0",
+      "UsbTethering": "false",
+      "RebootWatchdog": "no",
+      "Forward4": "0",
+      "Forward6": "0",
+      "AdbUid": "2000",
+      "BootId": "08847967-71c4-47e4-aafd-33410197d632",
+      "Uptime": "6272.64 6268.82",
+      "WifiApDisabled": true,
+      "NoSharingProcesses": true,
+      "MoSdkDisabled": true,
+      "ReadOnlySystem": true,
+      "HttpStatus": 200,
+      "MessageCount": 48
+    },
+    "Passed": true,
+    "Failures": []
+  },
+  "IdleWakeLockHeld": false,
+  "SmsLedOrAndroidRuntimeErrors": false,
+  "PublicReportContainsSmsBodiesSendersOrIds": false
+}

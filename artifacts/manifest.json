@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "date": "2026-10-17",
   "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
-  "description": "SMS service 4.0 with live WebSocket updates and radio status; unchanged SMS-only policy and Wi-Fi helper. SHA-256 detects file changes, not publisher authenticity.",
+  "description": "SMS service 4.1 with a five-second green page-visit indicator, blue SIM/network fault indication and dark idle; live WebSocket updates retained. SMS-only policy and Wi-Fi helper unchanged. SHA-256 detects file changes, not publisher authenticity.",
   "files": [
     {
-      "path": "artifacts/sms-modem-4.0.apk",
-      "sha256": "bc34b358227c4917020253edb22663f0183126fb198a786416d0f7a72a4b99c9",
+      "path": "artifacts/sms-modem-4.1.apk",
+      "sha256": "6e5b1ed12351ec6afa8ff9d115dbc9ecb59460741f7654349edd0a0761036e53",
       "bytes": 41360
     },
     {

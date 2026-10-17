@@ -28,7 +28,7 @@ $disabled = Invoke-ModemShell $Adb $Serial 'pm list packages -d'
 $checks['MoSdkDisabled'] = $disabled -match '(?m)^package:com\.mo\.sdk2230\r?$'
 $mounts = Invoke-ModemShell $Adb $Serial 'cat /proc/mounts'
 $checks['ReadOnlySystem'] = $mounts -match '(?m)^\S+ /system \S+ ro[, ]'
-$http = Invoke-WebRequest -UseBasicParsing -Uri 'http://192.168.100.1:8088/' -TimeoutSec 5
+$http = Invoke-WebRequest -UseBasicParsing -Method Head -Uri 'http://192.168.100.1:8088/' -TimeoutSec 5
 $checks['HttpStatus'] = [int]$http.StatusCode
 # Do not output or save the API's message content or sender.
 $api = Invoke-RestMethod -Uri 'http://192.168.100.1:8088/api/sms?limit=1' -TimeoutSec 5
