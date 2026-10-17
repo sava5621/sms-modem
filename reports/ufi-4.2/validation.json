@@ -92,11 +92,6 @@
     "MegaFon",
     "MTS"
   ],
-  "NetworkModesTested": [
-    0,
-    1,
-    9
-  ],
   "OriginalNetworkModeRestored": 12,
   "BootAfterSimSwapRestoredService": true,
   "AdditionalBootAround1715ExplainedByOwnerReconnect": true,
@@ -107,9 +102,36 @@
     "OwnerConfirmedBothModemsDisconnected": true
   },
   "NextSteps": [
-    "Reconnect second modem in better physical location",
-    "Check registration and real incoming SMS",
-    "Repeat browser and uptime stability checks"
+    "Identify exact DG PCB model/revision and establish whether factory firmware ever received SMS",
+    "Investigate compatible radio/firmware configuration with recoverable backups",
+    "After restoring registration, verify a real incoming SMS and repeat stability checks"
   ],
-  "PublicReportContainsSmsBodiesSendersOrKeys": false
+  "PublicReportContainsSmsBodiesSendersOrKeys": false,
+  "NetworkModesRequestedBeforeFollowup": [
+    0,
+    1,
+    9
+  ],
+  "RadioModeFollowup": {
+    "Date": "2026-10-17",
+    "CaseMarkings": {
+      "Second": "DG",
+      "First": "DT"
+    },
+    "FrameworkAllowedModes": [
+      2,
+      11,
+      12
+    ],
+    "OtherRequestedModesForcedTo": 12,
+    "RequestedZeroObservedInRil": 12,
+    "ActualWcdmaOnlyModeVerified": 2,
+    "WcdmaPacketRegistered": true,
+    "VoiceRegistrationStillSearching": true,
+    "OriginalModeRestored": 12,
+    "RootCauseResolved": false,
+    "TemporaryProbeRemoved": true,
+    "Report": "docs/15-dg-radio-diagnosis.md",
+    "FinalConfiguration": "reports/ufi-4.2/radio-final-configuration.json"
+  }
 }

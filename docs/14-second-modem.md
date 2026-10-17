@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | USB ADB serial на этой машине | `86e3aa1e` | `0` |
 | USB ID | `05C6:90B4` | `05C6:9024` |
+| Маркировка на наклейке корпуса | `DT` | `DG` |
 | Fingerprint | `qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys` | `qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.richal.20251104:user/test-keys` |
 | Android / SoC | 4.4.4 / MSM8916 | 4.4.4 / MSM8916 |
 | Адрес сайта | `http://192.168.100.1:8088/` | `http://192.168.101.1:8088/` |
@@ -73,7 +74,9 @@ Get-NetIPAddress -AddressFamily IPv4 | Select-Object InterfaceIndex,IPAddress,Pr
 
 При READY и `OUT_OF_SERVICE` проверьте SIM в заведомо рабочем устройстве и дайте модему время на регистрацию. Приложение не скрывает этот статус и не подменяет его наличием LTE-сигнала/пакетной регистрации. Не копируйте radio properties/NV другого модема.
 
-Для ограниченной диагностики с USB ADB доступна Activity с разрешением DUMP: `am start -n local.modem.hub/.UfiRadioActivity --ei mode <0|1|2|9|12>`. Она использует уже проверенный Binder Qualcomm FeatureService, меняет только стандартный preferred network mode и сохраняет исходное значение в настройках приложения. Проверяйте `settings get global preferred_network_mode`; после неудачного теста возвращайте исходный режим 12. Режимы: 0 GSM/WCDMA auto, 1 GSM-only, 2 WCDMA-only, 9 LTE/GSM/WCDMA, 12 LTE/WCDMA. Произвольных команд и изменения NV у неё нет.
+Для ограниченной диагностики с USB ADB доступна Activity с разрешением DUMP: `am start -n local.modem.hub/.UfiRadioActivity --ei mode <2|12>`. Она использует Binder Qualcomm FeatureService и сохраняет исходное значение в настройках приложения. Режимы: 2 WCDMA-only, 12 LTE/WCDMA. После проверки возвращайте исходный режим 12. Произвольных команд и изменения NV у неё нет.
+
+Дополнительная проверка выявила ограничение именно этой прошивки DG: её `RIL.setPreferredNetworkType` пропускает только 2, 11 и 12, остальные значения заменяет на 12. Установленная диагностическая Activity также принимает 0, 1 и 9, но это не включает GSM: например, запрос 0 записывается в Settings как 0, а в радиочасть реально отправляется 12. Поэтому одного `settings get global preferred_network_mode` недостаточно — сопоставляйте запрос с `REQUEST_SET_PREFERRED_NETWORK_TYPE` в radio logcat. Значение 11 (LTE-only) этой Activity не предоставляется. [Подробности и границы выводов](15-dg-radio-diagnosis.md).
 
 ## 6. Сборка и проверка из общих исходников
 

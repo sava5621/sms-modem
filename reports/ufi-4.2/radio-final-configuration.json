@@ -1,0 +1,60 @@
+{
+    "DateUtc":  "2026-10-17T15:04:51.8089497Z",
+    "ConfigurationPassed":  true,
+    "RadioRegistered":  false,
+    "CarrierSmsReceiptVerified":  false,
+    "Checks":  {
+                   "MobileData":  "0",
+                   "Roaming":  "0",
+                   "Wifi":  "0",
+                   "WifiScan":  "0",
+                   "TetherSupported":  "0",
+                   "Forward4":  "0",
+                   "Forward6":  "0",
+                   "SIM":  "READY",
+                   "BootId":  "20afe617-c680-435b-b4eb-284bb9c8a53e",
+                   "Uptime":  "1093.07 1075.75",
+                   "AdbIdentity":  "uid=2000(shell) gid=2000(shell) groups=1004(input),1007(log),1011(adb),1015(sdcard_rw),1028(sdcard_r),3001(net_bt_admin),3002(net_bt),3003(inet),3006(net_bw_stats)",
+                   "HttpStatus":  200,
+                   "MessageCount":  0,
+                   "ProviderAvailable":  true,
+                   "Network":  {
+                                   "signalLevel":  null,
+                                   "signalMetric":  "",
+                                   "updatedAt":  1792249223619,
+                                   "technology":  "LTE",
+                                   "simPresent":  true,
+                                   "registered":  false,
+                                   "available":  true,
+                                   "serviceState":  "OUT_OF_SERVICE",
+                                   "signalDbm":  null,
+                                   "simState":  "READY",
+                                   "simReady":  true,
+                                   "operator":  "MTS RUS"
+                               },
+                   "Indicator":  {
+                                     "fault":  "NO_NETWORK",
+                                     "hardwareAvailable":  true,
+                                     "color":  "BLUE",
+                                     "visitRemainingMs":  0
+                                 },
+                   "Policy":  {
+                                  "firewallEnabled":  true,
+                                  "uid":  1000,
+                                  "forwarding":  false,
+                                  "dataRoaming":  0,
+                                  "wifi":  0,
+                                  "mobileData":  0,
+                                  "error":  "",
+                                  "tethering":  false,
+                                  "checkedAt":  1792249489698
+                              },
+                   "NoDefaultRoute":  true,
+                   "NoSharingProcesses":  true,
+                   "VendorDisabled":  true,
+                   "NetdFirewallEnabled":  true
+               },
+    "Failures":  [
+
+                 ]
+}
