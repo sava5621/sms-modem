@@ -102,9 +102,9 @@
     "OwnerConfirmedBothModemsDisconnected": true
   },
   "NextSteps": [
-    "Ask seller/manufacturer for exact DG PCB revision, SMS support and matching stock firmware",
-    "Investigate compatible radio/firmware configuration with recoverable backups",
-    "After restoring registration, verify a real incoming SMS and repeat stability checks"
+    "Use photo-confirmed JZ02 V30 identity when investigating compatible radio firmware",
+    "Establish verified backup/recovery of original device partitions before any firmware change",
+    "After an evidence-based change, verify real SMS with working SIM and repeat stability checks"
   ],
   "PublicReportContainsSmsBodiesSendersOrKeys": false,
   "NetworkModesRequestedBeforeFollowup": [
@@ -145,6 +145,21 @@
       "Disassembled": false,
       "VendorPanelEnabledForIdentification": false,
       "SettingsChangedDuringIdentification": false
+    },
+    "BoardIdentificationFollowup": {
+      "Date": "2026-10-17",
+      "Source": "Owner photographs of both PCB sides",
+      "First": "UFI103S_V01",
+      "Second": "JZ02_V30",
+      "SecondPcbDate": "2023-07-10",
+      "SecondLabel": "JZ02V30-UFI-@",
+      "SimIntentionallyRemoved": true,
+      "ReadOnlySimSelectionMatchesExternalSlot": true,
+      "SelectedCarrierProfileReliablyDetermined": false,
+      "FirmwareChanged": false,
+      "NvChanged": false,
+      "TemporaryProbeRemoved": true,
+      "Report": "reports/ufi-4.2/board-followup.json"
     }
   }
 }

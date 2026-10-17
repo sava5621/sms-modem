@@ -1,0 +1,50 @@
+{
+  "Date": "2026-10-17",
+  "DateUtc": "2026-10-17T19:16:53.9788797Z",
+  "SimIntentionallyRemoved": true,
+  "HttpStatus": 200,
+  "Network": {
+    "signalLevel": null,
+    "signalMetric": "",
+    "updatedAt": 86405002,
+    "technology": "",
+    "simPresent": false,
+    "registered": false,
+    "available": true,
+    "serviceState": "OUT_OF_SERVICE",
+    "signalDbm": null,
+    "simState": "ABSENT",
+    "simReady": false,
+    "operator": ""
+  },
+  "Policy": {
+    "firewallEnabled": true,
+    "uid": 1000,
+    "forwarding": false,
+    "dataRoaming": 0,
+    "wifi": 0,
+    "mobileData": 0,
+    "error": "",
+    "tethering": false,
+    "checkedAt": 86787653
+  },
+  "Indicator": {
+    "fault": "NO_SIM",
+    "hardwareAvailable": true,
+    "color": "BLUE",
+    "visitRemainingMs": 0
+  },
+  "BoardIdentifiedFromOwnerPhotos": "JZ02_V30",
+  "BoardSilkscreenDate": "2023-07-10",
+  "WorkingBoardIdentifiedFromOwnerPhotos": "UFI103S_V01",
+  "SimSelectionReadOnly": {
+    "hotdet": 0,
+    "sim2": 0,
+    "sim1": 0,
+    "sim3": 255
+  },
+  "FirmwareChanged": false,
+  "NvChanged": false,
+  "TemporaryProbeRemoved": true,
+  "CarrierSmsReceiptTestedInThisFollowup": false
+}
