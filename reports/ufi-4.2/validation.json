@@ -102,7 +102,7 @@
     "OwnerConfirmedBothModemsDisconnected": true
   },
   "NextSteps": [
-    "Identify exact DG PCB model/revision and establish whether factory firmware ever received SMS",
+    "Ask seller/manufacturer for exact DG PCB revision, SMS support and matching stock firmware",
     "Investigate compatible radio/firmware configuration with recoverable backups",
     "After restoring registration, verify a real incoming SMS and repeat stability checks"
   ],
@@ -132,6 +132,19 @@
     "RootCauseResolved": false,
     "TemporaryProbeRemoved": true,
     "Report": "docs/15-dg-radio-diagnosis.md",
-    "FinalConfiguration": "reports/ufi-4.2/radio-final-configuration.json"
+    "FinalConfiguration": "reports/ufi-4.2/radio-final-configuration.json",
+    "FactoryPanelSmsTestedByOwner": true,
+    "FactoryPanelSmsReceivedBeforeCustomization": false,
+    "SoftwareHardwareIdentification": {
+      "Model": "UFI",
+      "Soc": "MSM8916",
+      "SocId": 206,
+      "SocRevision": "1.0",
+      "Platform": "MTP",
+      "PcbRevision": null,
+      "Disassembled": false,
+      "VendorPanelEnabledForIdentification": false,
+      "SettingsChangedDuringIdentification": false
+    }
   }
 }
