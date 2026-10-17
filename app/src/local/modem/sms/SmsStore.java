@@ -14,6 +14,10 @@ public final class SmsStore extends SQLiteOpenHelper {
     private static SmsStore instance;
     private final Context context;
     private boolean providerAvailable = true;
+    private Runnable changeListener;
+    public synchronized void setChangeListener(Runnable listener) { changeListener=listener; }
+    public synchronized void clearChangeListener(Runnable listener) { if(changeListener==listener)changeListener=null; }
+    private void changed() { if(changeListener!=null)changeListener.run(); }
     public static synchronized SmsStore get(Context context) {
         if (instance == null) instance = new SmsStore(context.getApplicationContext());
         return instance;
@@ -48,7 +52,7 @@ public final class SmsStore extends SQLiteOpenHelper {
         values.put("message_key", key);
         values.put("sender", sender); values.put("body", body);
         values.put("sent_at", sentAt); values.put("received_at", receivedAt); values.put("source", source);
-        db.insertWithOnConflict("messages", null, values, SQLiteDatabase.CONFLICT_IGNORE);
+        if(db.insertWithOnConflict("messages", null, values, SQLiteDatabase.CONFLICT_IGNORE)!=-1)changed();
     }
     public synchronized void importSystem() {
         Cursor cursor = null;
@@ -123,6 +127,7 @@ public final class SmsStore extends SQLiteOpenHelper {
             }
             db.setTransactionSuccessful();
         } finally { db.endTransaction(); }
+        if(removed>0)changed();
         return removed;
     }
 }

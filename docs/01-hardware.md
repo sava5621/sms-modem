@@ -41,7 +41,7 @@
 | Build fingerprint | `qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys` |
 | USB | VID `05C6`, PID `90B4`; RNDIS `MI_00`, ADB `MI_03` |
 | ADB serial этого экземпляра | `86e3aa1e` |
-| SMS-приложение | `local.modem.sms`, версия 3.0 |
+| SMS-приложение | `local.modem.sms`, версия 4.0; исходное испытание SMS-only выполнено на 3.0 |
 | Обработчик Wi-Fi | `local.modem.wifioff`, версия 1.0 |
 | Локальная страница | `http://192.168.100.1:8088/` |
 | Локальная база | `/data/data/local.modem.sms/databases/inbox.db` |

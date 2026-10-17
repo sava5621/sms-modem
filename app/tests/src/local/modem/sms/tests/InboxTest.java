@@ -62,6 +62,7 @@ public final class InboxTest extends Instrumentation {
         String body = FIRST + SECOND;
         String tag="QA-v2-"+System.currentTimeMillis(),senderA=tag+" + & A",senderB=tag+" B";
         java.util.ArrayList<Long> existing=new java.util.ArrayList<Long>();java.util.ArrayList<String> keys=new java.util.ArrayList<String>();
+        java.util.ArrayList<LiveClient> live=new java.util.ArrayList<LiveClient>();
         Cursor original=store.getReadableDatabase().rawQuery("SELECT _id FROM messages",null);
         try{while(original.moveToNext())existing.add(original.getLong(0));}finally{original.close();}
         try {
@@ -86,8 +87,20 @@ public final class InboxTest extends Instrumentation {
             check(payload!=null,"HTTP service did not start");
             JSONObject data=new JSONObject(payload);
             check(data.getJSONArray("messages").getJSONObject(0).getString("body").equals(body),"HTTP JSON lost message content");
+            for(int i=0;i<5;i++)live.add(new LiveClient());
+            JSONObject state=http("GET","/api/status",null,null,200).getJSONObject("network");
+            check(state.has("simState")&&state.has("registered")&&state.has("signalDbm")&&state.has("signalLevel"),"Network status schema missing");
+            if(!state.getBoolean("registered"))check(state.isNull("signalDbm")&&state.isNull("signalLevel"),"Stale signal shown without registration");
+            http("GET","/ws",null,"http://example.invalid",403);
+            http("GET","/ws",null,null,403);
             long stamp=System.currentTimeMillis();store.add(senderA,tag+" first",stamp,stamp,"qa");store.add(senderA,tag+" second",stamp+1,stamp+1,"qa");store.add(senderB,tag+" third",stamp+2,stamp+2,"qa");
             long first=idFor(store,tag+" first"),second=idFor(store,tag+" second"),third=idFor(store,tag+" third");
+            JSONObject addedEvent=live.get(0).await("messages");
+            check(addedEvent.getLong("revision")>live.get(0).initialRevision,"Insert push revision did not advance");
+            check(!addedEvent.has("body")&&!addedEvent.has("sender"),"Notification leaked message content");
+            long revisionBeforeDuplicate=http("GET","/api/status",null,null,200).getLong("revision");
+            store.add(senderB,tag+" third",stamp+2,stamp+2,"qa");
+            check(http("GET","/api/status",null,null,200).getLong("revision")==revisionBeforeDuplicate,"Duplicate generated a change event");
             Cursor synthetic=store.getReadableDatabase().rawQuery("SELECT message_key FROM messages WHERE sender=? OR sender=?",new String[]{senderA,senderB});
             try{while(synthetic.moveToNext())keys.add(synthetic.getString(0));}finally{synthetic.close();}
             String path="/api/sms?sender="+java.net.URLEncoder.encode(senderA,"UTF-8")+"&limit=1";
@@ -107,6 +120,7 @@ public final class InboxTest extends Instrumentation {
             check(exists(store,first)&&exists(store,second)&&exists(store,third),"Rejected deletion changed messages");
             JSONObject removed=http("POST","/api/sms/delete",deletion("3412",first,second,first),null,200);
             check(removed.getInt("deleted")==2&&!exists(store,first)&&!exists(store,second)&&exists(store,third),"Bulk selection deletion failed");
+            check(live.get(0).await("messages").getLong("revision")>addedEvent.getLong("revision"),"Deletion push missing");
             store.add(senderA,tag+" first",stamp,stamp,"system");store.add(senderA,tag+" second",stamp+1,stamp+1,"received");
             check(store.list(0,100,senderA).getInt("total")==0,"Deleted SMS reappeared during reimport");
             check(http("POST","/api/sms/delete",deletion("3412",first,second),null,200).getInt("deleted")==0,"Deletion retry not idempotent");
@@ -114,11 +128,14 @@ public final class InboxTest extends Instrumentation {
             for(int i=0;i<4;i++)check(guard.check("test-peer","0000")==-1,"Early rate limit");
             check(guard.check("test-peer","0000")>0&&guard.check("test-peer","3412")>0,"Brute-force limit missing");check(guard.check("other-peer","3412")==0,"Rate limit leaked across peers");
             for(Long id:existing)check(exists(store,id),"Pre-existing message changed");
-            result.putString("status","passed"); result.putString("tests","multipart Unicode, duplicate suppression, sender grouping/filter/pagination, HTTP JSON, wrong/missing code, origin rejection, invalid IDs, bulk deletion, idempotent retry, reimport suppression, rate limit");result.putInt("existing_messages_preserved",existing.size());
+            result.putString("status","passed"); result.putString("tests","multipart Unicode, duplicate suppression, sender grouping/filter/pagination, HTTP JSON, wrong/missing code, origin rejection, invalid IDs, bulk deletion, idempotent retry, reimport suppression, rate limit, WebSocket handshake/insert/delete push, five simultaneous sockets with HTTP available, network status schema, WebSocket Origin rejection");result.putInt("existing_messages_preserved",existing.size());
         } catch(Throwable ex) { code=0;result.putString("status","FAILED");result.putString("error",ex.toString()); }
         finally {
-            store.getWritableDatabase().delete("messages", "body=? AND source=?", new String[]{body,"received"});
-            store.getWritableDatabase().delete("messages","sender=? OR sender=?",new String[]{senderA,senderB});
+            for(LiveClient client:live)try{client.close();}catch(Exception ignored){}
+            Cursor cleanup=store.getReadableDatabase().query("messages",new String[]{"_id","message_key"},"(body=? AND source=?) OR sender=? OR sender=?",new String[]{body,"received",senderA,senderB},null,null,null);
+            java.util.ArrayList<Long> cleanupIds=new java.util.ArrayList<Long>();
+            try{while(cleanup.moveToNext()){cleanupIds.add(cleanup.getLong(0));keys.add(cleanup.getString(1));}}finally{cleanup.close();}
+            store.delete(cleanupIds);
             for(String key:keys)store.getWritableDatabase().delete("deleted_messages","message_key=?",new String[]{key});
             result.putString("cleanup","Removed only synthetic QA messages and their tombstones");
         }

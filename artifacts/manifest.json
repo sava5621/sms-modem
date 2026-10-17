@@ -2,12 +2,12 @@
   "formatVersion": 1,
   "date": "2026-10-17",
   "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
-  "description": "Prebuilt files from the verified SMS-only installation; installer added for reproducible setup. SHA-256 detects file changes, not publisher authenticity.",
+  "description": "SMS service 4.0 with live WebSocket updates and radio status; unchanged SMS-only policy and Wi-Fi helper. SHA-256 detects file changes, not publisher authenticity.",
   "files": [
     {
-      "path": "artifacts/sms-modem-3.0.apk",
-      "sha256": "687a8233878006dd5051ff06b38fe3b8b6125703b43cffa71b586aa67bc23556",
-      "bytes": 37264
+      "path": "artifacts/sms-modem-4.0.apk",
+      "sha256": "bc34b358227c4917020253edb22663f0183126fb198a786416d0f7a72a4b99c9",
+      "bytes": 41360
     },
     {
       "path": "artifacts/wifi-off-1.0.apk",

@@ -8,7 +8,7 @@ public final class MainActivity extends Activity {
         super.onCreate(state);
         startService(new Intent(this, SmsService.class));
         TextView text = new TextView(this);
-        text.setText("SMS modem\nhttp://192.168.100.1\nService is running.");
+        text.setText("SMS modem\nhttp://192.168.100.1:8088/\nService is running.");
         text.setTextSize(20);
         text.setPadding(24, 24, 24, 24);
         setContentView(text);

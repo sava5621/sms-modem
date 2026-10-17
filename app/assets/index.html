@@ -3,18 +3,23 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>СМС · Модем</title>
 <style>
 :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#15233c;background:#f3f6fa;font-synthesis:none}*{box-sizing:border-box}body{margin:0}main{max-width:880px;margin:0 auto;padding:40px 24px 32px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}.eyebrow{font-size:.875rem;color:#5a6b83;margin:0 0 8px}h1{font-size:2rem;letter-spacing:-.04em;line-height:1.2;margin:0}.count{display:inline-block;vertical-align:middle;font-size:.875rem;letter-spacing:0;background:#e5ecf6;color:#405877;padding:5px 10px;border-radius:20px;margin-left:8px}button{font:inherit;font-size:.9375rem;font-weight:600;border:1px solid #cdd8e8;background:white;color:#1e456f;border-radius:10px;min-height:44px;padding:10px 16px;cursor:pointer}button:hover{background:#edf3fc}button:focus-visible,input:focus-visible{outline:3px solid #2c73d2;outline-offset:3px}button:disabled{opacity:.5;cursor:default}.tabs{display:inline-flex;gap:4px;background:#e5ecf4;border-radius:12px;padding:4px;margin-bottom:20px}.tabs button{border:0;background:transparent;color:#5a6b83}.tabs button[aria-selected=true]{background:#fff;color:#1d4c82;box-shadow:0 1px 3px #20395513}.status{display:flex;align-items:center;gap:8px;font-size:.875rem;color:#5a6b83;margin-bottom:20px}.dot{width:7px;height:7px;border-radius:50%;background:#8796ab}.status[data-state=ok] .dot{background:#15956a}.status[data-state=error] .dot{background:#d65252}#notice{padding:14px 16px;background:#fff3db;color:#6c4910;border-radius:10px;margin-bottom:16px;font-size:.9375rem}.viewbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.viewbar h2{font-size:1.125rem;margin:0;overflow-wrap:anywhere}.viewbar .sub{color:#68788e;font-size:.875rem;margin-top:4px}.back{border:0;background:transparent;padding:4px 0;min-height:32px;margin-bottom:10px;font-weight:500}#select-toggle{flex-shrink:0}.group,.message{background:#fff;border:1px solid #dde4ed;border-radius:14px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 4px #19334c03}.group{display:block;text-align:left;width:100%;font-weight:400}.group .preview{font-size:.9375rem;color:#68788e;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin:10px 0 0}.group-meta{display:flex;align-items:center;gap:12px}.group-count{background:#e9f0fa;color:#295586;font-weight:600;font-size:.8125rem;padding:4px 9px;border-radius:20px}.message-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px}.group .message-head{margin-bottom:0}.sender{font-size:1rem;font-weight:650;overflow-wrap:anywhere}.time{font-size:.875rem;color:#66758b;white-space:nowrap}.body{font-size:1rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.message{position:relative}.message.selectable{padding-left:60px}.message.selected{border-color:#4d81be;background:#f8fbff}.pick{position:absolute;left:22px;top:21px;display:flex;align-items:center;justify-content:center;width:22px;height:26px}.pick input,.selection input{width:19px;height:19px;margin:0;accent-color:#2c69ad;cursor:pointer}.selection{position:sticky;top:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;margin-bottom:16px;border:1px solid #bed0e8;background:#edf4ff;border-radius:12px;box-shadow:0 4px 18px #2039550a}.selection label{display:flex;align-items:center;gap:9px;font-size:.875rem;cursor:pointer}.selection-right{display:flex;align-items:center;gap:12px}.selected-count{font-size:.875rem;color:#405877}.danger{background:#bd3443;color:#fff;border-color:#bd3443}.danger:hover{background:#a62736;border-color:#a62736}.danger:disabled{opacity:.4}#empty{text-align:center;background:white;border:1px dashed #ced9e8;border-radius:16px;padding:60px 24px}#empty svg{width:44px;height:44px;color:#57789f;margin-bottom:13px}#empty h2{font-size:1.25rem;margin:0 0 10px}#empty p{font-size:1rem;line-height:1.5;color:#68788e;margin:0}.footer{font-size:.8125rem;color:#728098;margin-top:26px}.more{text-align:center;margin-top:20px}#feedback{font-size:.9375rem;color:#206647;margin-bottom:16px}dialog{width:min(440px,calc(100% - 32px));border:1px solid #d2dce9;border-radius:18px;padding:28px;color:#15233c;box-shadow:0 24px 80px #0c23403b}dialog::backdrop{background:#15233c70}dialog h2{font-size:1.3rem;margin:0 0 12px}dialog p{font-size:.9375rem;line-height:1.6;color:#617087;margin:0 0 20px}dialog label{display:block;font-size:.9375rem;font-weight:600;margin-bottom:8px}#delete-code{display:block;width:100%;font:inherit;font-size:1.25rem;letter-spacing:.25em;border:1px solid #b7c7da;border-radius:9px;padding:12px 14px;color:#15233c;background:#fff}#delete-error{color:#b32d3b;font-size:.875rem;margin:10px 0 0;min-height:22px;line-height:1.4}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}[hidden]{display:none!important}@media(max-width:560px){main{padding:26px 16px}header{gap:12px}h1{font-size:1.8rem}.message,.group{padding:18px}.message.selectable{padding-left:52px}.pick{left:16px;top:16px}.message-head{align-items:flex-start;flex-direction:column;gap:5px}.group .message-head{flex-direction:row;align-items:flex-start}.group-meta{flex-direction:column;align-items:flex-end;gap:5px}.time{white-space:normal}.group .time{font-size:.8125rem;text-align:right}button{padding:10px 13px}.tabs{display:flex}.tabs button{flex:1;font-size:.875rem}.selection-right{width:100%;justify-content:space-between}.viewbar{align-items:flex-start}dialog{padding:24px}.dialog-actions button{flex:1}}@media(prefers-reduced-motion:no-preference){button{transition:background .15s}}
+.modem-health{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin-bottom:24px}.health-card{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#fff;border:1px solid #dde4ed;border-radius:14px;min-width:0}.health-icon{width:28px;height:32px;flex-shrink:0;color:#8291a6}.health-card[data-state=ok] .health-icon{color:#15956a}.health-card[data-state=error] .health-icon{color:#c94c52}.health-title{font-size:.9375rem;font-weight:650;overflow-wrap:anywhere}.health-detail{font-size:.8125rem;color:#68788e;margin-top:5px;line-height:1.4}.signal-bars{display:flex;align-items:flex-end;gap:3px;height:27px;flex-shrink:0;width:29px}.signal-bars i{display:block;width:5px;border-radius:2px;background:#dce4ee}.signal-bars i:nth-child(1){height:7px}.signal-bars i:nth-child(2){height:13px}.signal-bars i:nth-child(3){height:20px}.signal-bars i:nth-child(4){height:27px}.signal-bars i.active{background:#15956a}.health-card[data-state=weak] .signal-bars i.active{background:#cc902e}.status[data-state=reconnecting] .dot{background:#cc902e}#live-notice{padding:12px 16px;background:#edf4ff;color:#315b8c;border-radius:10px;margin-bottom:16px;font-size:.875rem;line-height:1.5}@media(max-width:560px){.modem-health{grid-template-columns:1fr;gap:8px;margin-bottom:20px}.health-card{padding:14px 16px}}
 </style></head>
 <body><main>
 <header><div><p class="eyebrow">МОДЕМ · ВХОДЯЩИЕ</p><h1>СМС <span class="count" id="count">—</span></h1></div><button id="refresh" type="button">Обновить</button></header>
+<section class="modem-health" aria-label="Состояние модема">
+<div class="health-card" id="sim-card" role="status" aria-live="polite"><svg class="health-icon" viewBox="0 0 28 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 2h11l7 7v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><rect x="8" y="13" width="12" height="11" rx="2"/><path d="M8 18h12m-6-5v11"/></svg><div><div class="health-title" id="sim-title">Проверяем SIM…</div><div class="health-detail" id="sim-detail">Ожидаем данные модема</div></div></div>
+<div class="health-card" id="network-card" role="status" aria-live="polite"><div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div><div class="health-title" id="network-title">Проверяем сеть…</div><div class="health-detail" id="network-detail">Ожидаем данные модема</div></div></div>
+</section>
 <div class="tabs" role="tablist" aria-label="Режим просмотра"><button id="tab-senders" role="tab" aria-selected="true" aria-controls="messages">По отправителям</button><button id="tab-all" role="tab" aria-selected="false" aria-controls="messages">Все СМС</button></div>
 <div class="status" id="status" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="status-text">Подключение к модему…</span></div>
-<div id="notice" hidden></div><div id="feedback" role="status" hidden></div>
+<div id="notice" hidden></div><div id="feedback" role="status" hidden></div><div id="live-notice" role="status" hidden>Есть изменения в СМС. Список обновится после завершения выбора.</div>
 <button class="back" id="back" hidden>← Все отправители</button>
 <div class="viewbar"><div><h2 id="view-title">Отправители</h2><div class="sub" id="view-sub"></div></div><button id="select-toggle" hidden>Выбрать</button></div>
 <div class="selection" id="selection" hidden><label><input type="checkbox" id="select-shown">Выбрать показанные (до 500)</label><div class="selection-right"><span class="selected-count" id="selected-count">Выбрано: 0</span><button class="danger" id="delete-selected" disabled>Удалить</button></div></div>
 <section id="messages" role="tabpanel" aria-label="Входящие сообщения"></section>
 <section id="empty" hidden><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="9" width="38" height="29" rx="6"/><path d="m7 12 17 13 17-13"/></svg><h2>СМС пока нет</h2><p>Новые сообщения появятся здесь автоматически.</p></section>
-<div class="more"><button id="more" hidden>Показать ещё</button></div><p class="footer">Обновление каждые 10 секунд · Просмотр без пароля · Удаление по коду</p>
+<div class="more"><button id="more" hidden>Показать ещё</button></div><p class="footer">Живое обновление СМС · Просмотр без пароля · Удаление по коду</p>
 </main>
 <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-description"><form id="delete-form"><h2 id="delete-title">Удалить выбранные СМС?</h2><p id="delete-description"></p><label for="delete-code">Код удаления</label><input id="delete-code" type="password" inputmode="numeric" minlength="4" maxlength="4" pattern="[0-9]{4}" autocomplete="off" required aria-describedby="delete-error"><div id="delete-error" role="alert"></div><div class="dialog-actions"><button id="delete-cancel" type="button">Отмена</button><button class="danger" id="delete-confirm" type="submit">Удалить</button></div></form></dialog>
 <script>
@@ -22,11 +27,49 @@
  'use strict';
  const $=id=>document.getElementById(id);
  let view='senders',sender=null,items=[],shown=100,hasMore=false,selecting=false,selected=new Set(),busy=false,requestId=0,controller=null,signature='',deleting=false;
+ let socket=null,live=false,reconnectTimer=null,retryDelay=1000,lastLiveMessage=0,pendingUpdate=false,reloadTimer=null,needsReload=true,lastUpdated='',networkBusy=false,networkVersion=0;
  const list=$('messages'),dialog=$('delete-dialog');
  const time=value=>new Date(value).toLocaleString('ru-RU',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
  const name=value=>value||'Неизвестный отправитель';
  function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
  function feedback(text){$('feedback').textContent=text;$('feedback').hidden=!text;}
+ function connectionState(){
+  $('status').setAttribute('data-state',live?'ok':'reconnecting');
+  $('status-text').textContent=selecting?'Обновление списка приостановлено на время выбора':(live?'Живое обновление включено':'Подключаем живое обновление · резервное обновление по таймеру')+(lastUpdated?' · обновлено в '+lastUpdated:'');
+ }
+ function renderNetwork(data){
+  if(!data)return;const state=data.simState||'UNKNOWN';
+  const simLabels={READY:['SIM установлена','Карта готова к приёму СМС'],ABSENT:['Нет SIM-карты','Карта не установлена'],PIN_REQUIRED:['SIM заблокирована','Требуется PIN-код'],PUK_REQUIRED:['SIM заблокирована','Требуется PUK-код'],NETWORK_LOCKED:['SIM заблокирована','Блокировка оператором'],NOT_READY:['SIM не готова','Инициализация карты'],UNKNOWN:['SIM: нет данных','Не удалось определить состояние карты']};
+  const label=simLabels[state]||simLabels.UNKNOWN;$('sim-title').textContent=label[0];$('sim-detail').textContent=label[1];$('sim-card').setAttribute('data-state',data.simReady?'ok':state==='UNKNOWN'||state==='NOT_READY'?'unknown':'error');
+  const registered=data.registered===true,level=registered&&Number.isInteger(data.signalLevel)?data.signalLevel:null;
+  document.querySelectorAll('.signal-bars i').forEach((bar,index)=>bar.classList.toggle('active',level!==null&&index<level));
+  $('network-card').setAttribute('data-state',!registered?'unknown':level!==null&&level<=1?'weak':'ok');
+  $('network-title').textContent=registered?((data.operator||'Оператор')+(data.technology?' · '+data.technology:'')):state==='ABSENT'?'Сеть недоступна':'Нет регистрации в сети';
+  let detail=state==='ABSENT'?'SIM-карта не установлена':!data.simReady?'Ожидание готовности SIM':data.serviceState==='POWER_OFF'?'Сотовое радио выключено':data.serviceState==='EMERGENCY_ONLY'?'Только экстренная связь':'Поиск сети оператора';
+  if(registered){detail=level===null?'Уровень сигнала недоступен':['Очень слабый сигнал','Слабый сигнал','Средний сигнал','Хороший сигнал','Отличный сигнал'][level];if(typeof data.signalDbm==='number')detail+=' · '+data.signalDbm+' дБм'+(data.signalMetric==='RSRP'?' RSRP':'');}
+  $('network-detail').textContent=detail;
+ }
+ function staleNetwork(){
+  renderNetwork({simState:'UNKNOWN',simReady:false,registered:false});$('sim-detail').textContent='Нет актуальных данных модема';$('network-detail').textContent='Проверяем подключение к модему';
+ }
+ async function loadNetwork(){
+  if(networkBusy)return;networkBusy=true;const version=networkVersion,abort=new AbortController(),timeout=setTimeout(()=>abort.abort(),7000);
+  try{const response=await fetch('/api/status',{cache:'no-store',signal:abort.signal});if(!response.ok)throw new Error('status');const data=await response.json();if(version===networkVersion)renderNetwork(data.network);}
+  catch(error){if(!live&&version===networkVersion)staleNetwork();}finally{clearTimeout(timeout);networkBusy=false;}
+ }
+ function queueRefresh(){
+  pendingUpdate=true;needsReload=true;if(selecting){$('live-notice').hidden=false;return;}if(busy)return;
+  clearTimeout(reloadTimer);reloadTimer=setTimeout(()=>{if(!busy&&!selecting)load(false);},120);
+ }
+ function connectLive(){
+  if(document.hidden||reconnectTimer||(socket&&(socket.readyState===0||socket.readyState===1))||!window.WebSocket)return;
+  let own;try{own=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws');}catch(error){scheduleReconnect();return;}socket=own;
+  own.onopen=()=>{if(socket!==own)return;live=true;retryDelay=1000;lastLiveMessage=Date.now();connectionState();};
+  own.onmessage=event=>{if(socket!==own)return;lastLiveMessage=Date.now();try{const message=JSON.parse(event.data);if(message.network){networkVersion++;renderNetwork(message.network);}if(message.type==='ready'||message.type==='messages')queueRefresh();}catch(error){own.close();}};
+  own.onclose=()=>{if(socket!==own)return;socket=null;live=false;connectionState();if(!document.hidden){staleNetwork();loadNetwork();scheduleReconnect();}};
+  own.onerror=()=>own.close();
+ }
+ function scheduleReconnect(){if(reconnectTimer||document.hidden)return;reconnectTimer=setTimeout(()=>{reconnectTimer=null;connectLive();},retryDelay);retryDelay=Math.min(30000,retryDelay*2);}
  function selectionState(){
   const ids=items.slice(0,500).map(m=>m.id),picked=ids.filter(id=>selected.has(id)).length;
   $('select-shown').checked=ids.length>0&&picked===ids.length;$('select-shown').indeterminate=picked>0&&picked<ids.length;
@@ -53,7 +96,7 @@
  }
  function navigate(next,nextSender){if(controller)controller.abort();requestId++;busy=false;view=next;sender=nextSender===undefined?null:nextSender;items=[];shown=100;selecting=false;selected.clear();signature='';hasMore=false;feedback('');list.textContent='';$('empty').hidden=true;$('view-sub').textContent='';navigation();load(false);}
  async function load(append){
-  if(busy||selecting)return;busy=true;navigation();const current=++requestId;controller=new AbortController();const ownController=controller,timeout=setTimeout(()=>ownController.abort(),10000);
+  if(busy||selecting)return;if(!append){pendingUpdate=false;clearTimeout(reloadTimer);}busy=true;navigation();const current=++requestId;controller=new AbortController();const ownController=controller,timeout=setTimeout(()=>ownController.abort(),10000);
   try{
    let offset=append?items.length:0,remaining=append?100:shown,received=[],data;
    do{const path=view==='senders'?'/api/senders':'/api/sms';let url=path+'?offset='+offset+'&limit='+Math.min(200,remaining);if(view==='thread')url+='&sender='+encodeURIComponent(sender);
@@ -61,12 +104,12 @@
    }while(data.hasMore&&remaining>0);
    if(current!==requestId)return;const next=append?items.concat(received):received,key=view==='senders'?'sender':'id';items=Array.from(new Map(next.map(item=>[item[key],item])).values());if(append)shown=items.length;hasMore=data.hasMore;
    $('count').textContent=data.globalTotal;$('view-sub').textContent=(view==='senders'?'Отправителей: ':'Сообщений: ')+data.total;$('notice').hidden=data.providerAvailable;$('notice').textContent='Не удалось прочитать прежние СМС из системного хранилища. Новые сообщения сохраняются отдельно.';
-   const nextSignature=JSON.stringify(items);if(nextSignature!==signature){signature=nextSignature;render();}else navigation();$('status').setAttribute('data-state','ok');$('status-text').textContent='Обновлено в '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  }catch(error){if(current!==requestId)return;$('status').setAttribute('data-state','error');$('status-text').textContent='Не удалось обновить список. Проверьте подключение к модему.';}finally{clearTimeout(timeout);if(current===requestId){busy=false;navigation();}}
+   const nextSignature=JSON.stringify(items);if(nextSignature!==signature){signature=nextSignature;render();}else navigation();needsReload=false;$('live-notice').hidden=true;lastUpdated=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});connectionState();
+  }catch(error){if(current!==requestId)return;needsReload=true;$('status').setAttribute('data-state','error');$('status-text').textContent='Не удалось обновить список. Проверьте подключение к модему.';}finally{clearTimeout(timeout);if(current===requestId){busy=false;navigation();if(pendingUpdate&&!selecting)queueRefresh();}}
  }
  $('tab-senders').addEventListener('click',()=>navigate('senders'));$('tab-all').addEventListener('click',()=>navigate('all'));$('back').addEventListener('click',()=>navigate('senders'));
  document.querySelector('.tabs').addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();const next=event.target.id==='tab-all'?$('tab-senders'):$('tab-all');next.focus();next.click();}});
- $('refresh').addEventListener('click',()=>load(false));$('more').addEventListener('click',()=>load(true));$('select-toggle').addEventListener('click',()=>{if(busy)return;selecting=!selecting;selected.clear();feedback('');render();if(selecting)$('status-text').textContent='Автообновление приостановлено на время выбора';else load(false);});
+ $('refresh').addEventListener('click',()=>{load(false);loadNetwork();});$('more').addEventListener('click',()=>load(true));$('select-toggle').addEventListener('click',()=>{if(busy)return;selecting=!selecting;selected.clear();feedback('');render();connectionState();if(!selecting)load(false);});
  $('select-shown').addEventListener('change',()=>{selected.clear();if($('select-shown').checked)items.slice(0,500).forEach(item=>selected.add(item.id));render();});
  $('delete-selected').addEventListener('click',()=>{if(!selected.size)return;$('delete-description').textContent='Выбрано сообщений: '+selected.size+'. Вернуть их из интерфейса не получится.';$('delete-code').value='';$('delete-error').textContent='';dialog.showModal();$('delete-code').focus();});
  $('delete-cancel').addEventListener('click',()=>dialog.close());dialog.addEventListener('cancel',event=>{if(deleting)event.preventDefault();});dialog.addEventListener('close',()=>{$('delete-code').value='';$('delete-error').textContent='';});
@@ -77,6 +120,10 @@
    dialog.close();selecting=false;selected.clear();signature='';feedback('Удалено сообщений: '+data.deleted);await load(false);
   }catch(error){$('delete-error').textContent='Не удалось подтвердить удаление. Проверьте связь и обновите список.';}finally{clearTimeout(timeout);deleting=false;$('delete-confirm').disabled=false;$('delete-cancel').disabled=false;$('delete-code').disabled=false;if(dialog.open){$('delete-code').focus();$('delete-code').select();}}
  });
- document.addEventListener('visibilitychange',()=>{if(!document.hidden)load(false);});setInterval(()=>{if(!document.hidden)load(false);},10000);load(false);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimeout(reconnectTimer);reconnectTimer=null;if(socket)socket.close();}else{connectLive();load(false);loadNetwork();}});
+ window.addEventListener('pagehide',()=>{clearTimeout(reconnectTimer);reconnectTimer=null;if(socket)socket.close();});
+ window.addEventListener('pageshow',()=>{if(!document.hidden)connectLive();});
+ setInterval(()=>{if(document.hidden)return;if(live&&Date.now()-lastLiveMessage>45000&&socket)socket.close();if(!live){load(false);loadNetwork();connectLive();}else if(needsReload&&!busy&&!selecting)load(false);},10000);
+ load(false);loadNetwork();connectLive();
 })();
 </script></body></html>

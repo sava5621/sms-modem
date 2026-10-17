@@ -43,7 +43,7 @@ ip route get 192.168.100.1
 .\scripts\Install-Apps.ps1 -Serial $serial -Adb $adb
 ```
 
-Устанавливаются подписанные `artifacts/sms-modem-3.0.apk` и `artifacts/wifi-off-1.0.apk`. Используется `adb install -r`, затем запускаются `local.modem.sms/.MainActivity` и `local.modem.wifioff/.EnableActivity`. Данные приложения не очищаются. Скрипт сначала проверяет прошивку и контрольные суммы поставки.
+Устанавливаются подписанные `artifacts/sms-modem-4.0.apk` и `artifacts/wifi-off-1.0.apk`. Используется `adb install -r`, затем запускаются `local.modem.sms/.MainActivity` и `local.modem.wifioff/.EnableActivity`. Данные приложения не очищаются. Скрипт сначала проверяет прошивку и контрольные суммы поставки.
 
 При `INSTALL_FAILED_UPDATE_INCOMPATIBLE` остановитесь: установлен APK с другой подписью. Сохраните данные и используйте исходный ключ подписи для обновления. Удаление приложения ради обхода этой ошибки удалит его локальный архив; установщик этого не делает.
 

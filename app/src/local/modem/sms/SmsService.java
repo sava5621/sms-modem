@@ -3,6 +3,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.Handler;
 import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class SmsService extends Service {
     private static final String PUBLIC_HOST = "sms-manager.nightlife-server.ru";
@@ -28,6 +30,18 @@ public final class SmsService extends Service {
     private ThreadPoolExecutor pool;
     private byte[] page;
     private final DeleteGuard deleteGuard = new DeleteGuard();
+    private final WebSocketHub sockets=new WebSocketHub();
+    private final AtomicLong revision=new AtomicLong();
+    private Handler events;
+    private NetworkMonitor network;
+    private final Runnable sendMessages=new Runnable(){public void run(){
+        try { if(running)sockets.broadcast(new JSONObject().put("type","messages").put("revision",revision.get()).toString()); }
+        catch(Exception ex) { Log.w("SmsInbox","Unable to publish message event"); }
+    }};
+    private final Runnable messagesChanged=new Runnable(){public void run(){
+        revision.incrementAndGet();
+        if(events!=null&&running){events.removeCallbacks(sendMessages);events.postDelayed(sendMessages,100);}
+    }};
     @Override public IBinder onBind(Intent intent) { return null; }
     @Override public int onStartCommand(Intent intent, int flags, int startId) { return START_STICKY; }
     @Override public void onCreate() {
@@ -38,6 +52,13 @@ public final class SmsService extends Service {
         } catch (Exception ex) { Log.e("SmsInbox", "Page unavailable", ex); stopSelf(); return; }
         pool = new ThreadPoolExecutor(2, 4, 30, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(12));
         running = true;
+        events=new Handler();
+        SmsStore.get(this).setChangeListener(messagesChanged);
+        network=new NetworkMonitor(this,new Runnable(){public void run(){
+            try { if(running)sockets.broadcast(stateMessage("network").toString()); }
+            catch(Exception ex) { Log.w("SmsNetwork","Unable to publish radio event"); }
+        }});
+        network.start();
         acceptThread = new Thread(new Runnable() { public void run() { serve(); } }, "sms-http");
         acceptThread.start();
     }
@@ -61,6 +82,7 @@ public final class SmsService extends Service {
         }
     }
     private void handle(Socket client) {
+        boolean upgraded=false;
         try {
             client.setSoTimeout(5000);
             String peer = client.getInetAddress().getHostAddress();
@@ -69,15 +91,19 @@ public final class SmsService extends Service {
             String[] lines = header.split("\r\n");
             String[] first = lines[0].split(" ");
             if (first.length != 3) { reply(client, 400, "text/plain", bytes("Bad request"), false); return; }
-            String host = "", origin = "", contentType="", action="", transfer="";
-            boolean hostSeen=false;
+            String host = "", origin = "", contentType="", action="", transfer="",upgrade="",connection="",socketKey="",socketVersion="";
+            boolean hostSeen=false,originSeen=false,keySeen=false,versionSeen=false;
             int contentLength=-1;
             for (int i=1; i<lines.length; i++) {
                 int colon = lines[i].indexOf(':');
                 if (colon <= 0) continue;
                 String key = lines[i].substring(0, colon).toLowerCase(Locale.US), value = lines[i].substring(colon+1).trim();
                 if (key.equals("host")) { if(hostSeen)throw new IllegalArgumentException("Duplicate host"); hostSeen=true; host=value.toLowerCase(Locale.US); }
-                if (key.equals("origin")) origin = value;
+                if (key.equals("origin")) { if(originSeen)throw new IllegalArgumentException("Duplicate origin");originSeen=true;origin=value; }
+                if (key.equals("upgrade")) upgrade=value;
+                if (key.equals("connection")) connection+=","+value;
+                if (key.equals("sec-websocket-key")) { if(keySeen)throw new IllegalArgumentException("Duplicate socket key");keySeen=true;socketKey=value; }
+                if (key.equals("sec-websocket-version")) { if(versionSeen)throw new IllegalArgumentException("Duplicate socket version");versionSeen=true;socketVersion=value; }
                 if (key.equals("content-type")) contentType = value;
                 if (key.equals("x-sms-action")) action = value;
                 if (key.equals("transfer-encoding")) transfer = value;
@@ -93,6 +119,17 @@ public final class SmsService extends Service {
             boolean head = first[0].equals("HEAD");
             if (!first[1].startsWith("/") || first[1].startsWith("//")) { reply(client, 400, "text/plain", bytes("Invalid target"), head); return; }
             Uri target = Uri.parse(first[1]);
+            if(target.getPath().equals("/ws")) {
+                if(!first[0].equals("GET")){reply(client,405,"text/plain",bytes("Method not allowed"),false);return;}
+                if(origin.isEmpty()){reply(client,403,"text/plain",bytes("Origin required"),false);return;}
+                if(!socketVersion.equals("13")){reply(client,426,"text/plain",bytes("WebSocket version 13 required"),false);return;}
+                if(!first[2].equals("HTTP/1.1")||!upgrade.equalsIgnoreCase("websocket")||!hasToken(connection,"upgrade")||!WebSocketProtocol.validKey(socketKey)||!transfer.isEmpty()||contentLength>0){
+                    reply(client,400,"text/plain",bytes("Invalid WebSocket handshake"),false);return;
+                }
+                upgraded=sockets.accept(client,socketKey,new WebSocketHub.InitialMessage(){public String get() throws Exception{return stateMessage("ready").toString();}});
+                if(!upgraded)reply(client,503,"text/plain",bytes("Too many live connections"),false);
+                return;
+            }
             if (first[0].equals("POST") && target.getPath().equals("/api/sms/delete")) {
                 if(!action.equals("delete") || !contentType.split(";",2)[0].trim().equalsIgnoreCase("application/json")) { reply(client,415,"application/json",bytes("{\"error\":\"JSON request required\"}"),false);return; }
                 if(!transfer.isEmpty() || contentLength<1 || contentLength>16384) { reply(client,400,"application/json",bytes("{\"error\":\"Invalid request size\"}"),false);return; }
@@ -122,6 +159,8 @@ public final class SmsService extends Service {
             } else if(target.getPath().equals("/api/senders")) {
                 int offset=number(target.getQueryParameter("offset"),0,0,1000000), limit=number(target.getQueryParameter("limit"),100,1,200);
                 reply(client,200,"application/json; charset=utf-8",bytes(SmsStore.get(this).senders(offset,limit).toString()),head);
+            } else if(target.getPath().equals("/api/status")) {
+                reply(client,200,"application/json; charset=utf-8",bytes(stateMessage("status").toString()),head);
             } else reply(client, 404, "text/plain", bytes("Not found"), head);
         } catch (IllegalArgumentException ex) {
             try { reply(client,400,"application/json",bytes("{\"error\":\"Invalid request\"}"),false); } catch(Exception ignored){}
@@ -130,7 +169,14 @@ public final class SmsService extends Service {
         } catch (Exception ex) {
             try { reply(client, 500, "application/json", bytes("{\"error\":\"Messages unavailable\"}"), false); } catch (Exception ignored) {}
             Log.w("SmsInbox", "Request failed: " + ex.getClass().getSimpleName());
-        } finally { try { client.close(); } catch (Exception ignored) {} }
+        } finally { if(!upgraded)try { client.close(); } catch (Exception ignored) {} }
+    }
+    private JSONObject stateMessage(String type) throws Exception {
+        return new JSONObject().put("type",type).put("revision",revision.get()).put("network",network.snapshot());
+    }
+    private static boolean hasToken(String value,String token) {
+        for(String part:value.split(","))if(part.trim().equalsIgnoreCase(token))return true;
+        return false;
     }
     private static int number(String value, int fallback, int min, int max) {
         try { return Math.max(min, Math.min(max, Integer.parseInt(value))); } catch (Exception ex) { return fallback; }
@@ -165,12 +211,16 @@ public final class SmsService extends Service {
     }
     private static byte[] bytes(String value) throws Exception { return value.getBytes("UTF-8"); }
     private static void reply(Socket client, int status, String mime, byte[] body, boolean head) throws Exception {
-        String reason = status == 200 ? "OK" : status == 403 ? "Forbidden" : status == 404 ? "Not Found" : status == 405 ? "Method Not Allowed" : status == 400 ? "Bad Request" : status == 415 ? "Unsupported Media Type" : status == 429 ? "Too Many Requests" : "Internal Server Error";
-        String header = "HTTP/1.1 " + status + " " + reason + "\r\nContent-Type: " + mime + "\r\nContent-Length: " + body.length + "\r\nConnection: close\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: DENY\r\nReferrer-Policy: no-referrer\r\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'\r\n\r\n";
+        String reason = status == 200 ? "OK" : status == 403 ? "Forbidden" : status == 404 ? "Not Found" : status == 405 ? "Method Not Allowed" : status == 400 ? "Bad Request" : status == 415 ? "Unsupported Media Type" : status == 426 ? "Upgrade Required" : status == 429 ? "Too Many Requests" : status == 503 ? "Service Unavailable" : "Internal Server Error";
+        String header = "HTTP/1.1 " + status + " " + reason + "\r\nContent-Type: " + mime + "\r\nContent-Length: " + body.length + "\r\nConnection: close\r\n"+(status==426?"Sec-WebSocket-Version: 13\r\n":"")+"Cache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: DENY\r\nReferrer-Policy: no-referrer\r\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' ws://192.168.100.1 ws://192.168.100.1:8088 wss://"+PUBLIC_HOST+"; frame-ancestors 'none'; base-uri 'none'; form-action 'none'\r\n\r\n";
         OutputStream output = client.getOutputStream(); output.write(header.getBytes("ISO-8859-1")); if (!head) output.write(body); output.flush();
     }
     @Override public void onDestroy() {
         running = false;
+        SmsStore.get(this).clearChangeListener(messagesChanged);
+        if(events!=null)events.removeCallbacksAndMessages(null);
+        if(network!=null)network.stop();
+        sockets.shutdown();
         try { if (listener != null) listener.close(); } catch (Exception ignored) {}
         if (acceptThread != null) acceptThread.interrupt(); if (pool != null) pool.shutdownNow();
         super.onDestroy();

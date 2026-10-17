@@ -1,0 +1,9 @@
+INSTRUMENTATION_RESULT: existing_messages_preserved=48
+
+INSTRUMENTATION_RESULT: status=passed
+
+INSTRUMENTATION_RESULT: tests=multipart Unicode, duplicate suppression, sender grouping/filter/pagination, HTTP JSON, wrong/missing code, origin rejection, invalid IDs, bulk deletion, idempotent retry, reimport suppression, rate limit, WebSocket handshake/insert/delete push, five simultaneous sockets with HTTP available, network status schema, WebSocket Origin rejection
+
+INSTRUMENTATION_RESULT: cleanup=Removed only synthetic QA messages and their tombstones
+
+INSTRUMENTATION_CODE: -1
