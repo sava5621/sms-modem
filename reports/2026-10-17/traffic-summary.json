@@ -1,0 +1,7 @@
+{
+  "ObservationSeconds": 90,
+  "PacketLines": 350,
+  "RouterExternalIPv4PacketLines": 0,
+  "RecordedPayloads": false,
+  "Description": "Local SMS HTTP and host multicast observed; no external modem IPv4 packets observed."
+}

@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.modem.sms.tests">
+  <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="19" />
+  <application android:label="SMS modem tests" />
+  <instrumentation android:name="local.modem.sms.tests.InboxTest" android:targetPackage="local.modem.sms" />
+</manifest>

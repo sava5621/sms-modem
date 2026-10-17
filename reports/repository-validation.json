@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-17",
+  "scope": "Repository packaging only; no modem installation was executed during packaging",
+  "builds": {
+    "WindowsPowerShell51": "passed",
+    "Ecj": "3.21.0",
+    "Api": 19,
+    "BuildTools": "28.0.3",
+    "Java": 8,
+    "PowerShell7": "passed",
+    "IncludeInstrumentationApk": true
+  },
+  "originalApks": {
+    "signerCertificateSha256": "c25eeda64643a9cd9e335b4ac37634fc5364ac8ba55feebc75ecccaa22f51682",
+    "signatureV2": "verified",
+    "signatureV1": "verified"
+  },
+  "rebuiltDexMatchesOriginal": {
+    "smsOnlyControl": true,
+    "wifiOff": true,
+    "smsModem": true
+  },
+  "scriptChecks": {
+    "RemoteFailureMarker": "rejected correctly",
+    "AndroidShellEncoding": "LF without BOM",
+    "NewInstallerOnDevice": "not run",
+    "MissingMarker": "rejected correctly",
+    "TcpAdbSerial": "rejected correctly",
+    "FirmwareMismatch": "rejected correctly",
+    "PowerShellSyntax": "passed in 5.1 and 7",
+    "ShellSyntax": "bash -n passed"
+  },
+  "localMarkdownLinks": "all resolved",
+  "privateSmsAndSigningKeys": "excluded"
+}

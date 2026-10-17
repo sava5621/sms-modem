@@ -1,0 +1,26 @@
+# Local tools, build output, private backups and signing keys
+.local/
+build/
+dist/
+.idea/
+.junie/
+.vscode/
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.db
+*.db-*
+*.sqlite*
+*.tar
+*.tar.gz
+*.tgz
+*.log
+*.pcap
+*.pcapng
+.env
+.env.*
+!.env.example
+Thumbs.db
+Desktop.ini

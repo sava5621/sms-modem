@@ -1,0 +1,38 @@
+{
+  "formatVersion": 1,
+  "date": "2026-10-17",
+  "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
+  "description": "Prebuilt files from the verified SMS-only installation; installer added for reproducible setup. SHA-256 detects file changes, not publisher authenticity.",
+  "files": [
+    {
+      "path": "artifacts/sms-modem-3.0.apk",
+      "sha256": "687a8233878006dd5051ff06b38fe3b8b6125703b43cffa71b586aa67bc23556",
+      "bytes": 37264
+    },
+    {
+      "path": "artifacts/wifi-off-1.0.apk",
+      "sha256": "1b8a9d30942f454ef2f712d52938b6ddc6bdbcbb2df8d8c489aa89e311abeb5c",
+      "bytes": 12625
+    },
+    {
+      "path": "artifacts/sms-only-control.jar",
+      "sha256": "17841242bb73ddbb584ebd8f20ea30193b727f49c6da0ee2e8e223945e5fc404",
+      "bytes": 1835
+    },
+    {
+      "path": "modem/modem-usb-lan.sh",
+      "sha256": "535e3b5d5e58724ab5701b6f7848291609ddd5f7e5672025c54fa6fe8ca1b71f",
+      "bytes": 1830
+    },
+    {
+      "path": "modem/sms-only-policy.sh",
+      "sha256": "7774ca385b7689b0f3fe74751d872817761d3cc853ad0d27388702d5dbc54162",
+      "bytes": 4702
+    },
+    {
+      "path": "modem/install-sms-only.sh",
+      "sha256": "c5420c3b34323a8fde83412790a6797bb5c3ca314e89e39890455369307049b0",
+      "bytes": 4341
+    }
+  ]
+}

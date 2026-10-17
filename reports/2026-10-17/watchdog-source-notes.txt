@@ -1,0 +1,10 @@
+Воспроизведённый программный сброс — 17.10.2026.
+Журнал: Watchdog / ShutdownThread: Received ACTION_REBOOT broadcast.
+Статический анализ установленного SystemUI.apk:
+com.android.systemui.statusbar.policy.NetworkController$3.run()
+сначала читает persist.ufi.nosignal.reboot (по умолчанию yes).
+При значении no сразу возвращается, не запрашивая перезагрузку.
+При включённой проверке, SIM READY, выключенном авиарежиме и
+mDataConnected=false посылает android.intent.action.REBOOT и гасит LED.
+Установлено persist.ufi.nosignal.reboot=no. Телефония и SystemUI остаются включены.
+Это отдельный механизм от testConnect в штатной веб-панели.

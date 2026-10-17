@@ -1,0 +1,20 @@
+{
+  "Date": "2026-10-17",
+  "DurationSeconds": 385.0,
+  "Samples": 19,
+  "Http200": 19,
+  "UnavailableSamples": 0,
+  "UniqueBootIds": 1,
+  "BootIds": [
+    "08847967-71c4-47e4-aafd-33410197d632"
+  ],
+  "CpuTempMinC": 46.0,
+  "CpuTempMaxC": 50.0,
+  "PmicTempMaxC": 45.325,
+  "AllSamplesMobileDataOff": true,
+  "AllSamplesForwardingOff": true,
+  "AllSamplesNoDataRebootOff": true,
+  "TestSmsSeen": true,
+  "InitialMessageCount": 47,
+  "FinalMessageCount": 48
+}
