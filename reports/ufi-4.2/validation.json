@@ -160,6 +160,23 @@
       "NvChanged": false,
       "TemporaryProbeRemoved": true,
       "Report": "reports/ufi-4.2/board-followup.json"
+    },
+    "SimReturnedFollowup": {
+      "Date": "2026-10-17",
+      "SimReady": true,
+      "SimSmsRecords": 5,
+      "SimSmsFree": 5,
+      "SmsStatusesChanged": false,
+      "NativeGsmModeRequested": 1,
+      "NativeGsmRequestAccepted": false,
+      "NativeGsmError": "GENERIC_FAILURE",
+      "ActualNetworkModeRestored": 12,
+      "ConfigurationPassed": true,
+      "CarrierSmsReceiptVerified": false,
+      "DiagnosticPhoneProcessRestartRecorded": true,
+      "ModemBootIdUnchangedDuringDiagnostic": true,
+      "TemporaryPackageRemoved": true,
+      "Report": "reports/ufi-4.2/sim-return-validation.json"
     }
   }
 }
