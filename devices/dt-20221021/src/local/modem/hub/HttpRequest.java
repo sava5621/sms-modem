@@ -17,6 +17,6 @@ public final class HttpRequest {
  }
  String get(String key){String v=headers.get(key);return v==null?"":v;}
  String body(InputStream in)throws IOException {byte[] b=new byte[length];int n=0;while(n<b.length){int got=in.read(b,n,b.length-n);if(got<0)throw new IOException("Incomplete body");n+=got;}return new String(b,"UTF-8");}
- static boolean validHost(String host){return host.equals("192.168.101.1:8088")||host.equals("192.168.101.1:8000")||host.equals("192.168.101.1:80")||host.equals("192.168.101.1")||host.equals("localhost:18081")||host.equals("127.0.0.1:18081")||host.equals("127.0.0.1:18088");}
+ static boolean validHost(String host){return host.equals("192.168.100.2:8088")||host.equals("192.168.100.2:8000")||host.equals("192.168.100.2:80")||host.equals("192.168.100.2")||host.equals("localhost:18081")||host.equals("127.0.0.1:18081")||host.equals("127.0.0.1:18088");}
  static boolean validOrigin(String origin,String host){return origin.isEmpty()||origin.equals("http://"+host);}
 }

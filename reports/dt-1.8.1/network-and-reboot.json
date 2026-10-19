@@ -1,0 +1,17 @@
+{
+  "checkedAtUtc": "2026-10-19T18:01:52.7415186Z",
+  "modemAddress": "192.168.100.2",
+  "httpPort": 80,
+  "http80AfterModemReboot": true,
+  "smsCountPreserved": true,
+  "callsCountPreserved": true,
+  "greetingPreserved": true,
+  "version": "1.8.1-DT",
+  "deviceAddressAssignedToWindows": false,
+  "uf7PersistentHostRoute": true,
+  "dtPersistentHostRoute": true,
+  "uf7Port8088Reachable": true,
+  "uf7DeviceConfigurationChanged": false,
+  "dtRealCallDeferred": true,
+  "windowsFullRebootDeferred": true
+}

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "date": "2026-10-19",
   "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
-  "description": "DT 2022 full service 1.8, legacy DT SMS 4.1, UFI 2025 SMS 4.2 and separate UF7 2022 full service 1.8. Installers check exact firmware; DT keeps mobile data disabled and UF7 keeps it enabled. SHA-256 detects file changes, not publisher authenticity.",
+  "description": "DT 2022 full service 1.8.1 at 192.168.100.2:80 with persistent device NAT, legacy DT SMS 4.1, UFI 2025 SMS 4.2 and UF7 full service 1.8. DT keeps mobile data disabled and UF7 keeps it enabled. SHA-256 detects file changes, not publisher authenticity.",
   "files": [
     {
       "path": "artifacts/sms-modem-4.1.apk",
@@ -59,18 +59,31 @@
     },
     {
       "path": "devices/dt-20221021/system/modem-usb-lan.sh",
-      "sha256": "6e1b2ebba2f36ad723d01ffc5641156da3841dc687c3904988f8c5243b2b89e2",
+      "sha256": "12da4a61fcb7111f4bef7d7d0b026f89598bbc0126f7f620f77f9cbb9d80bfe1",
       "bytes": 1830
     },
     {
       "path": "devices/dt-20221021/system/sms-only-policy.sh",
-      "sha256": "a70d53b14a6fb812605f8895b203ad539f0dde89f39df1db745c3283cb8c2a30",
-      "bytes": 4724
+      "sha256": "6444a7902c42f4a8a14b49619f52f8824f6549455c6b821fc041505f77008705",
+      "bytes": 6049
     },
     {
       "path": "devices/dt-20221021/system/migrate.sh",
-      "sha256": "6fbff9986e5caf1d52668f766546bc93a7a9131c1d7a35183764035e9d18fab3",
-      "bytes": 3524
+      "sha256": "1727fda8c26863d2994a98b1fdcd91bb53fef319599106e833f1a863fa1e867b",
+      "bytes": 3554
+    },
+    {
+      "path": "artifacts/sms-modem-dt-1.8.1.apk",
+      "sha256": "d1c299426a10edd4d87f05006ce75a68a1a29a6bb41b29375428d80140947072",
+      "bytes": 82504,
+      "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
+      "package": "local.modem.hub",
+      "version": "1.8.1-DT"
+    },
+    {
+      "path": "devices/dt-20221021/system/apply-network.sh",
+      "sha256": "c04ce76344a7e32b2ce16daa581d62aabbf125c40ae6c0b46306bec257413f82",
+      "bytes": 2493
     }
   ]
 }

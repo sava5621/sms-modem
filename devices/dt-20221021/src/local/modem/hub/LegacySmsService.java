@@ -37,7 +37,7 @@ public final class LegacySmsService extends Service {
             try {
                 listener = new ServerSocket();
                 listener.setReuseAddress(true);
-                listener.bind(new InetSocketAddress(InetAddress.getByName("192.168.101.1"), port), 16);
+                listener.bind(new InetSocketAddress(InetAddress.getByName("192.168.100.2"), port), 16);
                 sockets.add(listener);Log.i("SmsInbox", "HTTP listener ready on LAN port "+port);
                 while (running) {
                     final Socket client = listener.accept();
@@ -54,7 +54,7 @@ public final class LegacySmsService extends Service {
     private void handle(Socket client){WebEndpoint.handle(this,client,false);}
     static void reply(Socket client, int status, String mime, byte[] body, boolean head) throws Exception {
         String reason = status == 409 ? "Conflict" : status == 503 ? "Service Unavailable" : status == 202 ? "Accepted" : status == 401 ? "Unauthorized" : status == 200 ? "OK" : status == 403 ? "Forbidden" : status == 404 ? "Not Found" : status == 405 ? "Method Not Allowed" : status == 400 ? "Bad Request" : status == 415 ? "Unsupported Media Type" : status == 429 ? "Too Many Requests" : "Internal Server Error";
-        String header = "HTTP/1.1 " + status + " " + reason + "\r\nContent-Type: " + mime + "\r\nContent-Length: " + body.length + "\r\nConnection: close\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: DENY\r\nReferrer-Policy: no-referrer\r\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' ws://192.168.101.1 ws://192.168.101.1:8000 ws://192.168.101.1:8088 ws://localhost:18081 ws://127.0.0.1:18081; media-src 'self' blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'\r\n\r\n";
+        String header = "HTTP/1.1 " + status + " " + reason + "\r\nContent-Type: " + mime + "\r\nContent-Length: " + body.length + "\r\nConnection: close\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: DENY\r\nReferrer-Policy: no-referrer\r\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' ws://192.168.100.2 ws://192.168.100.2:8000 ws://192.168.100.2:8088 ws://localhost:18081 ws://127.0.0.1:18081; media-src 'self' blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'\r\n\r\n";
         OutputStream output = client.getOutputStream(); output.write(header.getBytes("ISO-8859-1")); if (!head) output.write(body); output.flush();
     }
     @Override public void onDestroy() {

@@ -1,0 +1,17 @@
+{
+  "webSockets": [
+    {
+      "url": "ws://192.168.100.2/ws",
+      "connected": true,
+      "event": "connected"
+    },
+    {
+      "url": "ws://localhost:18081/ws",
+      "connected": true,
+      "event": "connected"
+    }
+  ],
+  "greetingRangeStatus": 206,
+  "greetingRangeLength": 44,
+  "localPanelReachable": true
+}

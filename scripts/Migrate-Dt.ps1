@@ -13,7 +13,7 @@ New-Item -ItemType Directory -Force $private | Out-Null
 $oldPath=Invoke-ModemShell $Adb $Serial 'pm path local.modem.sms'
 if($oldPath -notmatch '^package:(/data/app/local\.modem\.sms-[0-9]+\.apk)$'){throw 'Expected the existing DT SMS application'}
 $null=Invoke-ModemAdb $Adb $Serial @('pull',$Matches[1],(Join-Path $private 'old-sms.apk'))
-$result=Invoke-ModemAdb $Adb $Serial @('install',(Join-Path $root 'artifacts/sms-modem-dt-1.8.apk'))
+$result=Invoke-ModemAdb $Adb $Serial @('install',(Join-Path $root 'artifacts/sms-modem-dt-1.8.1.apk'))
 if($result -notmatch '(?m)^Success\r?$'){throw "DT installation failed: $result"}
 $stage='/data/local/tmp/dt-ui-migration'
 $null=Invoke-ModemShell $Adb $Serial "mkdir -p $stage"
@@ -36,5 +36,5 @@ try{
 if(-not $migrationSucceeded){throw 'Migration incomplete. Inspect the private backup; do not overwrite the new inbox.'}
 $null=Invoke-ModemShell $Adb $Serial 'am start -n local.modem.hub/.MainActivity --ez apply_configuration true --ez apply_security true'
 Write-Output "DT migrated; private backup: $private"
-Write-Output 'Configure only this USB adapter with devices/dt-20221021/host/configure-windows.ps1 as administrator. Panel: http://192.168.101.1:8088/'
+Write-Output 'Configure only this USB adapter with devices/dt-20221021/host/configure-windows.ps1 as administrator. Panel: http://192.168.100.2/'
 Write-Output 'Save a greeting in the panel, then verify a real SMS, caller-heard greeting, recorded speech and automatic hangup.'

@@ -10,7 +10,7 @@ import java.net.*;
 import org.json.*;
 
 public final class DeviceControl {
- static final String IP="192.168.101.1";
+ static final String IP="192.168.100.2";
  static final String VENDOR="com.wowi.nanowebyl";
  final Context c;
  volatile String error="";

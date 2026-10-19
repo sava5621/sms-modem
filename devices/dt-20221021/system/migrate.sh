@@ -7,6 +7,7 @@ export PATH
 [ ! -e /data/data/local.modem.hub/databases/inbox.db ] || { echo 'Target database already exists; refusing overwrite'; exit 12; }
 [ -f /data/data/local.modem.sms/databases/inbox.db ] || exit 13
 stage=/data/local/tmp/dt-ui-migration
+. "$stage/sms-only-policy.sh"
 backup=/data/local/sms-only/backups/dt-ui-$(date +%s)-$$
 mkdir -p "$backup/system"
 chmod 700 "$backup"
@@ -52,7 +53,7 @@ if [ -n "${old_pid:-}" ]; then
  done
  if [ -r "/proc/$old_pid/cmdline" ] && busybox grep -q 'modem-usb-lan.sh' "/proc/$old_pid/cmdline"; then echo 'Previous helper did not stop'; exit 15; fi
 fi
-ifconfig rndis0 192.168.101.1 netmask 255.255.255.0 up
+ifconfig rndis0 192.168.100.2 netmask 255.255.255.0 up
 for fw in iptables ip6tables; do
  for chain in SMS_ONLY_IN SMS_ONLY_OUT SMS_ONLY_FWD; do "$fw" -F "$chain"; done
 done

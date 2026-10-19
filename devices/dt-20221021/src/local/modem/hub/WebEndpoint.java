@@ -9,7 +9,7 @@ final class WebEndpoint {
  static void handle(Context context,Socket socket,boolean fullStatus){boolean upgraded=false;
   try{
    socket.setSoTimeout(10000);String peer=socket.getInetAddress().getHostAddress();
-   if(!peer.equals("127.0.0.1")&&!peer.startsWith("192.168.101.")){reply(socket,403,"text/plain","LAN access only".getBytes("UTF-8"),false);return;}
+   if(!peer.equals("127.0.0.1")&&!peer.startsWith("192.168.100.")){reply(socket,403,"text/plain","LAN access only".getBytes("UTF-8"),false);return;}
    HttpRequest r=new HttpRequest(socket.getInputStream());String host=r.get("host").toLowerCase(Locale.US);boolean head=r.method.equals("HEAD");
    byte[] raw=new byte[r.length];int p=0;while(p<raw.length){int n=socket.getInputStream().read(raw,p,raw.length-p);if(n<0)throw new EOFException();p+=n;}
    if(!HttpRequest.validHost(host)||!HttpRequest.validOrigin(r.get("origin"),host)){reply(socket,403,"text/plain","Invalid host or origin".getBytes("UTF-8"),head);return;}

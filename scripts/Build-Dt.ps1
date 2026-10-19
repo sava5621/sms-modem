@@ -22,7 +22,7 @@ if($LASTEXITCODE){throw 'DT DEX failed'}
 if($LASTEXITCODE){throw 'DT packaging failed'}
 Push-Location $out
 try{& (Join-Path $BuildToolsDirectory 'aapt.exe') add unsigned.apk classes.dex;if($LASTEXITCODE){throw 'DT DEX packaging failed'}}finally{Pop-Location}
-$signed=Join-Path $root 'build/sms-modem-dt-1.8.apk'
+$signed=Join-Path $root 'build/sms-modem-dt-1.8.1.apk'
 & $Java -jar (Join-Path $BuildToolsDirectory 'lib/apksigner.jar') sign --key $PlatformKey --cert $PlatformCertificate --min-sdk-version 19 --out $signed (Join-Path $out 'unsigned.apk')
 if($LASTEXITCODE){throw 'DT signing failed'}
 & $Java -jar (Join-Path $BuildToolsDirectory 'lib/apksigner.jar') verify --print-certs $signed

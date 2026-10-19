@@ -27,17 +27,17 @@ restore_lan() {
     current="$(ip -o -4 addr show dev rndis0 2>/dev/null)"
     if [ -n "$current" ]; then
         case "$current" in
-            *' inet 192.168.101.1/24 '*) ;;
+            *' inet 192.168.100.2/24 '*) ;;
             *) return ;;
         esac
         read flags < /sys/class/net/rndis0/flags
         [ "$((flags & 1))" -eq 1 ] && return
     else
         # Leave the firmware's bridge alone while it owns the LAN address.
-        ip -o -4 addr | busybox grep -q ' inet 192.168.101.1/' && return
+        ip -o -4 addr | busybox grep -q ' inet 192.168.100.2/' && return
     fi
-    if ifconfig rndis0 192.168.101.1 netmask 255.255.255.0 up; then
-        log -p i -t ModemUsbLan 'Restored rndis0 local LAN 192.168.101.1/24'
+    if ifconfig rndis0 192.168.100.2 netmask 255.255.255.0 up; then
+        log -p i -t ModemUsbLan 'Restored rndis0 local LAN 192.168.100.2/24'
     fi
 }
 
