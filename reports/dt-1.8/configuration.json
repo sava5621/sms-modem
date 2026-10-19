@@ -1,0 +1,28 @@
+{
+  "CheckedAtUtc": "2026-10-19T17:44:46.1075446Z",
+  "Passed": true,
+  "Checks": {
+    "Version": "1.8-DT",
+    "SimReady": true,
+    "VoiceRegistered": true,
+    "DataRegistered": true,
+    "MobileDataPreserved": true,
+    "WifiOff": true,
+    "ForwardingOff": true,
+    "FirewallEnabled": true,
+    "RoamingOff": true,
+    "TetheringDisabled": true,
+    "WatchdogDisabled": true,
+    "AdbTcpDisabled": true,
+    "AdbNormalUser": true,
+    "AutoAnswerEnabled": true,
+    "GreetingReady": true,
+    "AnswerDelaySeconds": 5,
+    "MessageSeconds": 20,
+    "SmsCount": 0,
+    "CallCount": 0,
+    "ServiceError": "",
+    "CallError": ""
+  },
+  "Failures": []
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "timeUtc": "2026-10-19T17:42:57.8226778Z",
+    "sim": 5,
+    "voice": 1,
+    "data": 1,
+    "signalDbm": -101,
+    "serviceError": "",
+    "callError": ""
+  },
+  {
+    "timeUtc": "2026-10-19T17:43:01.8864737Z",
+    "sim": 5,
+    "voice": 1,
+    "data": 1,
+    "signalDbm": -113,
+    "serviceError": "",
+    "callError": ""
+  },
+  {
+    "timeUtc": "2026-10-19T17:43:05.9451402Z",
+    "sim": 5,
+    "voice": 0,
+    "data": 0,
+    "signalDbm": -113,
+    "serviceError": "",
+    "callError": ""
+  },
+  {
+    "timeUtc": "2026-10-19T17:43:10.0260748Z",
+    "sim": 5,
+    "voice": 0,
+    "data": 0,
+    "signalDbm": -113,
+    "serviceError": "",
+    "callError": ""
+  },
+  {
+    "timeUtc": "2026-10-19T17:43:14.0918908Z",
+    "sim": 5,
+    "voice": 0,
+    "data": 0,
+    "signalDbm": -113,
+    "serviceError": "",
+    "callError": ""
+  },
+  {
+    "timeUtc": "2026-10-19T17:43:18.1613295Z",
+    "sim": 5,
+    "voice": 0,
+    "data": 0,
+    "signalDbm": -113,
+    "serviceError": "",
+    "callError": ""
+  }
+]

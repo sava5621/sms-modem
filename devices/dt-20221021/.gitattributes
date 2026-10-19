@@ -1,0 +1,2 @@
+* text eol=lf
+host/*.ps1 text eol=crlf

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "date": "2026-10-19",
   "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
-  "description": "First modem 4.1, second UFI 2025 build 4.2, and a separate UF7 2022 profile 1.8 with SMS, call recording and answering machine. Each installer checks its exact firmware. SHA-256 detects file changes, not publisher authenticity.",
+  "description": "DT 2022 full service 1.8, legacy DT SMS 4.1, UFI 2025 SMS 4.2 and separate UF7 2022 full service 1.8. Installers check exact firmware; DT keeps mobile data disabled and UF7 keeps it enabled. SHA-256 detects file changes, not publisher authenticity.",
   "files": [
     {
       "path": "artifacts/sms-modem-4.1.apk",
@@ -48,6 +48,29 @@
       "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.libinglin.20220328:userdebug/test-keys",
       "package": "local.modem.hub",
       "version": "1.8-UF7"
+    },
+    {
+      "path": "artifacts/sms-modem-dt-1.8.apk",
+      "sha256": "0bced3458b86a215e744b7b4496008299b906c00c18c08b6886ba216c4a241ca",
+      "bytes": 82504,
+      "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
+      "package": "local.modem.hub",
+      "version": "1.8-DT"
+    },
+    {
+      "path": "devices/dt-20221021/system/modem-usb-lan.sh",
+      "sha256": "6e1b2ebba2f36ad723d01ffc5641156da3841dc687c3904988f8c5243b2b89e2",
+      "bytes": 1830
+    },
+    {
+      "path": "devices/dt-20221021/system/sms-only-policy.sh",
+      "sha256": "a70d53b14a6fb812605f8895b203ad539f0dde89f39df1db745c3283cb8c2a30",
+      "bytes": 4724
+    },
+    {
+      "path": "devices/dt-20221021/system/migrate.sh",
+      "sha256": "6fbff9986e5caf1d52668f766546bc93a7a9131c1d7a35183764035e9d18fab3",
+      "bytes": 3524
     }
   ]
 }

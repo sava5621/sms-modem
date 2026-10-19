@@ -1,0 +1,8 @@
+{
+  "localStartupReachable": true,
+  "loopbackOnly": true,
+  "webSocketConnected": true,
+  "webSocketEvent": "connected",
+  "greetingRangeStatus": 206,
+  "greetingRangeBytes": 44
+}

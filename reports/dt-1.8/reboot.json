@@ -1,0 +1,11 @@
+{
+  "softwareReboot": true,
+  "serviceStartedAutomatically": true,
+  "archiveCountBefore": 0,
+  "archiveCountAfter": 0,
+  "greetingPreserved": true,
+  "greetingDurationMs": 14381,
+  "voiceRegisteredAfterStartup": true,
+  "callTestDeferredByOwner": true,
+  "windowsFullRebootDeferred": true
+}
