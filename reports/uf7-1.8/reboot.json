@@ -1,0 +1,11 @@
+{
+  "SoftwareRebootRecovered": true,
+  "AdbAutoRestartCount": 1,
+  "NetworkAdbListening": false,
+  "ArchivePreserved": true,
+  "GreetingPreserved": true,
+  "UptimeMs": 124229,
+  "LocalPanelAvailable": true,
+  "FullWindowsRebootTested": false,
+  "StartupShortcutLaunchTested": true
+}

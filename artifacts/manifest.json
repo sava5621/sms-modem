@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
-  "date": "2026-10-17",
+  "date": "2026-10-19",
   "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.rel.20221021:userdebug/test-keys",
-  "description": "First modem SMS service 4.1 plus a separate second-modem UFI 2025 build 4.2 (local.modem.hub, 192.168.101.1). Each installer checks its exact firmware. SHA-256 detects file changes, not publisher authenticity.",
+  "description": "First modem 4.1, second UFI 2025 build 4.2, and a separate UF7 2022 profile 1.8 with SMS, call recording and answering machine. Each installer checks its exact firmware. SHA-256 detects file changes, not publisher authenticity.",
   "files": [
     {
       "path": "artifacts/sms-modem-4.1.apk",
@@ -40,6 +40,14 @@
       "bytes": 49558,
       "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.richal.20251104:user/test-keys",
       "package": "local.modem.hub"
+    },
+    {
+      "path": "artifacts/sms-modem-uf7-1.8.apk",
+      "sha256": "bdcebc5a737df63028763c495575221db13b445fc666d36549fb3284f128ed40",
+      "bytes": 82504,
+      "firmware": "qcom/msm8916_32_512/msm8916_32_512:4.4.4/KTU84P/eng.libinglin.20220328:userdebug/test-keys",
+      "package": "local.modem.hub",
+      "version": "1.8-UF7"
     }
   ]
 }

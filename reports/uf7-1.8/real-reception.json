@@ -1,0 +1,15 @@
+{
+  "ColdBootChanged": true,
+  "SmsReceived": true,
+  "CallsReceived": true,
+  "UserConfirmedSmsCallsGreeting": true,
+  "CallStatus": "completed",
+  "AnswerDelayMs": 5487,
+  "GreetingDurationMs": 14529,
+  "MessageUntilHangupMs": 20677,
+  "RecordingPresent": true,
+  "CallError": null,
+  "MicRecordedAndPreviewPlayed": true,
+  "MicDraftDiscarded": true,
+  "FemaleGreetingPreserved": true
+}
